@@ -32,12 +32,14 @@
       "semicolons": "always"
     }
   },
-  "overrides": [{
-    "include": ["app/components/shadcn/ui/**"],
-    "linter": {
-      "rules": {
-        "nursery": { "useSortedClasses": "off" }
+  "overrides": [
+    {
+      "include": ["app/components/shadcn/ui/**"],
+      "linter": {
+        "rules": {
+          "nursery": { "useSortedClasses": "off" }
+        }
       }
     }
-  }]
+  ]
 }
