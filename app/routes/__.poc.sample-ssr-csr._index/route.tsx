@@ -2,14 +2,14 @@ import { useEffect, useRef } from 'react';
 import { useFetcher } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import { Input } from '~/components/shadcn/ui/input';
-import type { PokeResource } from '../__.poc/types/poke';
+import type { NamedAPIResource } from '../__.poc/types/pokemon';
 import type { Route } from './+types/route';
 
 const fetchPokes = async (keyword?: string) => {
   // PokeAPI から全ポケモンリストを取得
   const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
   const data = await response.json();
-  const allPokemon: PokeResource[] = data.results;
+  const allPokemon: NamedAPIResource[] = data.results;
 
   if (!keyword) {
     return { pokemons: allPokemon };

@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
-import type { PokeResourceList } from '../__.poc/types/poke';
+import type { PokemonResourceList } from '../__.poc/types/pokemon';
 import type { Route } from './+types/route';
 
 // loaderは、サーバーサイドでのみ実行される
@@ -15,7 +15,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`,
   );
-  const data = (await res.json()) as PokeResourceList;
+  const data = (await res.json()) as PokemonResourceList;
 
   return { data, offset, limit };
 };
