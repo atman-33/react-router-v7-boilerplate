@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import {
   Sidebar,
   SidebarContent,
@@ -19,14 +20,16 @@ const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
   return (
     <Sidebar>
       <SidebarHeader className="h-[72px] border-b">
-        <div className="flex items-center gap-2 pt-2">
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-            alt="Pikachu"
-            className="w-12"
-          />
-          <span className="font-bold">Pokemon</span>
-        </div>
+        <Link to="/poc/remix-tutorial">
+          <div className="flex items-center gap-2 pt-2">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+              alt="Pikachu"
+              className="w-12"
+            />
+            <span className="font-bold">Pokemon</span>
+          </div>
+        </Link>
       </SidebarHeader>
       <SidebarContent className="pl-2">
         <SidebarGroup />
@@ -35,15 +38,17 @@ const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
           <SidebarMenu>
             {pokemons.map((pokemon) => (
               <SidebarMenuItem key={pokemon.id}>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={pokemon.image}
-                    alt="404"
-                    aria-label={pokemon.name}
-                    className="w-8"
-                  />
-                  <span>{pokemon.name}</span>
-                </div>
+                <Link to={`/poc/remix-tutorial/pokemons/${pokemon.id}`}>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={pokemon.image}
+                      alt="404"
+                      aria-label={pokemon.name}
+                      className="w-8"
+                    />
+                    <span>{pokemon.name}</span>
+                  </div>
+                </Link>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
