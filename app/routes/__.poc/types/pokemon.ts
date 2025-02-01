@@ -10,6 +10,12 @@ export interface NamedAPIResource {
   url: string;
 }
 
+export interface PokemonSummary {
+  id: number;
+  name: string;
+  image: string;
+}
+
 export interface Pokemon {
   id: number;
   name: string;
