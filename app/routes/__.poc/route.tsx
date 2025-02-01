@@ -1,14 +1,18 @@
 import { Link, Outlet } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
+import { Separator } from '~/components/shadcn/ui/separator';
 
 const PocLayout = () => {
   return (
-    <div className="container mx-auto flex flex-col gap-4 p-4">
-      <Link to="/" className="mr-4">
-        <Button variant="secondary">Go to Home</Button>
-      </Link>
+    <>
+      <div className="my-4 mr-4 flex justify-end">
+        <Link to="/">
+          <Button variant="secondary">Go to Home</Button>
+        </Link>
+      </div>
+      <Separator />
       <Outlet />
-    </div>
+    </>
   );
 };
 
