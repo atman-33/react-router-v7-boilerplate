@@ -18,25 +18,30 @@ interface RemixTutorialSidebarProps {
 const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
   return (
     <Sidebar>
-      <SidebarHeader className="border-b">
-        <div className="flex items-center gap-2">
+      <SidebarHeader className="h-[72px] border-b">
+        <div className="flex items-center gap-2 pt-2">
           <img
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
             alt="Pikachu"
-            className="w-16"
+            className="w-12"
           />
-          <span>Pokemon</span>
+          <span className="font-bold">Pokemon</span>
         </div>
       </SidebarHeader>
       <SidebarContent className="pl-2">
         <SidebarGroup />
-        <SidebarGroupLabel>List</SidebarGroupLabel>
+        <SidebarGroupLabel>Total {pokemons.length}</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {pokemons.map((pokemon) => (
               <SidebarMenuItem key={pokemon.id}>
                 <div className="flex items-center gap-2">
-                  <img src={pokemon.image} alt={pokemon.name} className="w-8" />
+                  <img
+                    src={pokemon.image}
+                    alt="404"
+                    aria-label={pokemon.name}
+                    className="w-8"
+                  />
                   <span>{pokemon.name}</span>
                 </div>
               </SidebarMenuItem>
@@ -44,7 +49,9 @@ const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter className="border-t py-4 font-bold">
+        React Router x shadcn/ui
+      </SidebarFooter>
     </Sidebar>
   );
 };
