@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useFetcher, useParams } from 'react-router';
 import {
   Card,
   CardContent,
@@ -5,48 +7,55 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/shadcn/ui/card';
+import { LoadingDots } from '~/components/shared/loading-dots/loading-dots';
 import type { Pokemon } from '../__.poc/types/pokemon';
 import type { Route } from './+types/route';
 
-export const loader = async ({ params }: Route.LoaderArgs) => {
+export const clientLoader = async ({ params }: Route.ClientLoaderArgs) => {
   const { pokemonId } = params;
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
   const pokemon = (await res.json()) as Pokemon;
   return { pokemon };
 };
 
+export const HydrateFallback = () => {
+  return <LoadingDots />;
+};
+
 const PokemonPage = ({ loaderData }: Route.ComponentProps) => {
-  const { pokemon } = loaderData;
+  const fetcher = useFetcher<typeof loaderData>();
+  const pokemon = fetcher.data?.pokemon;
+  const { pokemonId } = useParams();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    fetcher.load(`/poc/remix-tutorial/pokemons/${pokemonId}`);
+  }, [pokemonId]);
 
   return (
     <div className="container mx-auto p-4">
+      {fetcher.state !== 'idle' ? <LoadingDots /> : null}
       <Card>
         <CardHeader>
           <CardTitle className="font-bold text-2xl">
-            <h2>{pokemon.name}</h2>
+            <h2>{pokemon?.name}</h2>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-row items-center">
-            <img src={pokemon.sprites.front_default ?? ''} alt={pokemon.name} />
-            <div>
-              <p>Height: {pokemon.height}</p>
-              <p>Weight: {pokemon.weight}</p>
-            </div>
-          </div>
+          <img src={pokemon?.sprites.front_default ?? ''} alt={pokemon?.name} />
           <CardDescription className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
               <h3 className="mt-4 font-bold text-xl">Base</h3>
               <ul>
-                <li>Height: {pokemon.height}</li>
-                <li>Weight: {pokemon.weight}</li>
+                <li>Height: {pokemon?.height}</li>
+                <li>Weight: {pokemon?.weight}</li>
               </ul>
             </div>
 
             <div>
               <h3 className="mt-4 font-bold text-xl">Status</h3>
               <ul>
-                {pokemon.abilities.map((ability) => (
+                {pokemon?.abilities.map((ability) => (
                   <li key={ability.ability.name}>{ability.ability.name}</li>
                 ))}
               </ul>
@@ -54,7 +63,7 @@ const PokemonPage = ({ loaderData }: Route.ComponentProps) => {
             <div>
               <h3 className="mt-4 font-bold text-xl">Types</h3>
               <ul>
-                {pokemon.types.map((type) => (
+                {pokemon?.types.map((type) => (
                   <li key={type.type.name}>{type.type.name}</li>
                 ))}
               </ul>
@@ -62,7 +71,7 @@ const PokemonPage = ({ loaderData }: Route.ComponentProps) => {
             <div>
               <h3 className="mt-4 font-bold text-2xl">Stats</h3>
               <ul>
-                {pokemon.stats.map((stat) => (
+                {pokemon?.stats.map((stat) => (
                   <li key={stat.stat.name}>
                     {stat.stat.name}: {stat.base_stat}
                   </li>
