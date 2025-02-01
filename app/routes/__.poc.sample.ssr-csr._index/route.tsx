@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useFetcher } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import { Input } from '~/components/shadcn/ui/input';
-import type { NamedAPIResource } from '../__.poc/types/pokemon';
+import type { NamedAPIResource } from '../__.poc.sample/types/pokemon';
 import type { Route } from './+types/route';
 
 const fetchPokes = async (keyword?: string) => {
   // PokeAPI から全ポケモンリストを取得
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=2000');
   const data = await response.json();
   const allPokemon: NamedAPIResource[] = data.results;
 
@@ -69,7 +69,7 @@ const PocSampleSsrCsrPage = ({
       <h1 className="font-bold text-xl">Sample SSR CSR Page</h1>
       <h2 className="text-lg">Pokemon List</h2>
       <fetcher.Form
-        action="/poc/sample-ssr-csr"
+        action="/poc/sample/ssr-csr"
         method="post"
         className="flex flex-col gap-4"
         ref={formRef}

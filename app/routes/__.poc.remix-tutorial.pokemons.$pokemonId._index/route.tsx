@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '~/components/shadcn/ui/card';
 import { LoadingDots } from '~/components/shared/loading-dots/loading-dots';
-import type { Pokemon } from '../__.poc/types/pokemon';
+import type { Pokemon } from '../__.poc.sample/types/pokemon';
 import type { Route } from './+types/route';
 
 export const clientLoader = async ({ params }: Route.ClientLoaderArgs) => {

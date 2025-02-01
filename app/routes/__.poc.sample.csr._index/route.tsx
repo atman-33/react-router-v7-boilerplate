@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
-import type { PokemonResourceList } from '../__.poc/types/pokemon';
+import type { PokemonResourceList } from '../__.poc.sample/types/pokemon';
 import type { Route } from './+types/route';
 
 // clientLoaderは、クライアントサイドでのみ実行される

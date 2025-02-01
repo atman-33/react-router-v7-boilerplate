@@ -12,19 +12,17 @@ const LinkButton = ({ to, label }: { to: string; label: string }) => {
 const PocPage = () => {
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-center gap-4 p-4">
+        <Link to="/">
+          <Button variant="secondary">Home</Button>
+        </Link>
+
+        <LinkButton to="/poc/sample/csr" label="Sample CSR (Pokemon List)" />
+        <LinkButton to="/poc/sample/ssr" label="Sample SSR (Pokemon List)" />
+        <LinkButton to="/poc/sample/ssg" label="Go to Sample SSG (About Me)" />
         <LinkButton
-          to="/poc/sample-csr"
-          label="Go to Sample CSR (Pokemon List)"
-        />
-        <LinkButton
-          to="/poc/sample-ssr"
-          label="Go to Sample SSR (Pokemon List)"
-        />
-        <LinkButton to="/poc/sample-ssg" label="Go to Sample SSG (About Me)" />
-        <LinkButton
-          to="/poc/sample-ssr-csr"
-          label="Go to Sample SSR & CSR (Pokemon List)"
+          to="/poc/sample/ssr-csr"
+          label="Sample SSR & CSR (Pokemon List)"
         />
         <LinkButton to="/poc/remix-tutorial" label="Remix Tutorial" />
       </div>

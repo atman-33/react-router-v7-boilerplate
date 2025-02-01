@@ -5,9 +5,16 @@ import { Separator } from '~/components/shadcn/ui/separator';
 const PocLayout = () => {
   return (
     <>
-      <div className="my-4 mr-4 flex justify-end">
+      <div className="my-4 mr-4 flex justify-center gap-4">
         <Link to="/">
-          <Button variant="secondary">Go to Home</Button>
+          <Button variant="secondary" className="w-20">
+            Home
+          </Button>
+        </Link>
+        <Link to="/poc">
+          <Button variant="secondary" className="w-20">
+            PoC
+          </Button>
         </Link>
       </div>
       <Separator />

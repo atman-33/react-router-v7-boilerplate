@@ -10,7 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from '~/components/shadcn/ui/sidebar';
-import type { PokemonSummary } from '~/routes/__.poc/types/pokemon';
+import type { PokemonSummary } from '~/routes/__.poc.sample/types/pokemon';
 
 interface RemixTutorialSidebarProps {
   pokemons: PokemonSummary[];
@@ -19,15 +19,15 @@ interface RemixTutorialSidebarProps {
 const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
   return (
     <Sidebar>
-      <SidebarHeader className="h-[72px] border-b">
+      <SidebarHeader className="border-b">
         <Link to="/poc/remix-tutorial">
-          <div className="flex items-center gap-2 pt-2">
+          <div className="flex items-center gap-2">
             <img
               src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
               alt="Pikachu"
-              className="w-12"
+              className="h-12"
             />
-            <span className="font-bold">Pokemon</span>
+            <span className="font-bold">Pokemon Data</span>
           </div>
         </Link>
       </SidebarHeader>

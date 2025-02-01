@@ -12,7 +12,6 @@ const RemixTutorialTopPage = () => {
       name: 'bulbasaur',
       height: 7,
       weight: 69,
-      base_experience: 64,
       sprites: {
         front_default:
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
@@ -22,7 +21,6 @@ const RemixTutorialTopPage = () => {
       name: 'charmander',
       height: 6,
       weight: 85,
-      base_experience: 62,
       sprites: {
         front_default:
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
@@ -32,7 +30,6 @@ const RemixTutorialTopPage = () => {
       name: 'squirtle',
       height: 5,
       weight: 90,
-      base_experience: 63,
       sprites: {
         front_default:
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
@@ -54,9 +51,6 @@ const RemixTutorialTopPage = () => {
               <img src={pokemon.sprites.front_default} alt={pokemon.name} />
               <CardDescription>Height: {pokemon.height}</CardDescription>
               <CardDescription>Weight: {pokemon.weight}</CardDescription>
-              <CardDescription>
-                Base Experience: {pokemon.base_experience}
-              </CardDescription>
             </CardContent>
           </Card>
         ))}
