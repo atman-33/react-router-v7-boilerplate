@@ -20,14 +20,14 @@ const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
   return (
     <Sidebar>
       <SidebarHeader className="border-b">
-        <Link to="/poc/remix-tutorial">
+        <Link to="/poc/pokemons">
           <div className="flex items-center gap-2">
             <img
               src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
               alt="Pikachu"
               className="h-12"
             />
-            <span className="font-bold">Pokemon Data</span>
+            <span className="font-bold">Pokemon App</span>
           </div>
         </Link>
       </SidebarHeader>
@@ -38,7 +38,7 @@ const RemixTutorialSidebar = ({ pokemons }: RemixTutorialSidebarProps) => {
           <SidebarMenu>
             {pokemons.map((pokemon) => (
               <SidebarMenuItem key={pokemon.id}>
-                <Link to={`/poc/remix-tutorial/pokemons/${pokemon.id}`}>
+                <Link to={`/poc/pokemons/${pokemon.id}`}>
                   <div className="flex items-center gap-2">
                     <img
                       src={pokemon.image}

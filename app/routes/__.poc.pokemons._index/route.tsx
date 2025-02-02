@@ -57,7 +57,12 @@ const RemixTutorialTopPage = () => {
       </div>
       <p className="mt-4">
         Data sourced from{' '}
-        <a href="https://pokeapi.co/" className="text-blue-500 underline">
+        <a
+          href="https://pokeapi.co/"
+          className="text-blue-500 underline"
+          target="_blank"
+          rel="noreferrer"
+        >
           PokeAPI
         </a>
         .

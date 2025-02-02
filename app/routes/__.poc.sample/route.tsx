@@ -18,7 +18,9 @@ const PocLayout = () => {
         </Link>
       </div>
       <Separator />
-      <Outlet />
+      <div className="container mx-auto p-4">
+        <Outlet />
+      </div>
     </>
   );
 };

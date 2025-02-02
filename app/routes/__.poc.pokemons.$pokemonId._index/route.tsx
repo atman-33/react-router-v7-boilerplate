@@ -29,7 +29,7 @@ const PokemonPage = ({ loaderData }: Route.ComponentProps) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    fetcher.load(`/poc/remix-tutorial/pokemons/${pokemonId}`);
+    fetcher.load(`/poc/pokemons/${pokemonId}`);
   }, [pokemonId]);
 
   return (

@@ -17,14 +17,11 @@ const PocPage = () => {
           <Button variant="secondary">Home</Button>
         </Link>
 
-        <LinkButton to="/poc/sample/csr" label="Sample CSR (Pokemon List)" />
-        <LinkButton to="/poc/sample/ssr" label="Sample SSR (Pokemon List)" />
-        <LinkButton to="/poc/sample/ssg" label="Go to Sample SSG (About Me)" />
-        <LinkButton
-          to="/poc/sample/ssr-csr"
-          label="Sample SSR & CSR (Pokemon List)"
-        />
-        <LinkButton to="/poc/remix-tutorial" label="Remix Tutorial" />
+        <LinkButton to="/poc/sample/csr" label="Sample CSR" />
+        <LinkButton to="/poc/sample/ssr" label="Sample SSR" />
+        <LinkButton to="/poc/sample/ssg" label="Go to Sample SSG" />
+        <LinkButton to="/poc/sample/ssr-csr" label="Sample SSR & CSR" />
+        <LinkButton to="/poc/pokemons" label="Pokemon App" />
       </div>
     </div>
   );

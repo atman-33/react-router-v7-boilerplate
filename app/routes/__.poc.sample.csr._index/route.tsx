@@ -31,7 +31,7 @@ const PocSampleCsrPage = ({ loaderData }: Route.ComponentProps) => {
   const prevOffset = Number.parseInt(offset) - Number.parseInt(limit);
 
   return (
-    <div className="container mx-auto flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4">
       <h1 className="font-bold text-xl">Sample CSR Page</h1>
       <h2 className="text-lg">Pokemon List</h2>
       <ul>
