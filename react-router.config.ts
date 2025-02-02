@@ -5,6 +5,6 @@ export default {
   // Server-side render by default, to enable SPA mode set this to `false`
   ssr: true,
   async prerender() {
-    return ['/poc/sample-ssg'];
+    return ['/poc/sample/ssg'];
   },
 } satisfies Config;
