@@ -24,7 +24,14 @@ export const loader = async () => {
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { contacts } = loaderData;
   return (
-    <SidebarProvider>
+    <SidebarProvider
+      style={
+        {
+          '--sidebar-width': '20rem',
+          '--sidebar-width-mobile': '20rem',
+        } as React.CSSProperties
+      }
+    >
       <ContactsSidebar contacts={contacts} />
       <SidebarInset>
         <header className="flex h-10 shrink-0 items-center gap-2 border-b px-4">
