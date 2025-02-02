@@ -14,7 +14,7 @@ import {
 } from '~/components/shadcn/ui/sidebar';
 import type { PokemonResourceList } from '../__.poc._index/types/pokemon';
 import type { Route } from './+types/route';
-import RemixTutorialSidebar from './components/remix-tutorial-sidebar';
+import { PokemonSidebar } from './components/pokemon-sidebar';
 
 // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png
 
@@ -40,7 +40,7 @@ const RemixTutorialLayout = ({ loaderData }: Route.ComponentProps) => {
   return (
     <>
       <SidebarProvider>
-        <RemixTutorialSidebar pokemons={pokemons} />
+        <PokemonSidebar pokemons={pokemons} />
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
