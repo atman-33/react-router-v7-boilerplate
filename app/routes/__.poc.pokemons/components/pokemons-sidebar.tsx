@@ -31,28 +31,29 @@ const PokemonsSidebar = ({ pokemons }: PokemonsSidebarProps) => {
           </div>
         </Link>
       </SidebarHeader>
-      <SidebarContent className="pl-2">
-        <SidebarGroup />
-        <SidebarGroupLabel>Total {pokemons.length}</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {pokemons.map((pokemon) => (
-              <SidebarMenuItem key={pokemon.id}>
-                <Link to={`/poc/pokemons/${pokemon.id}`}>
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={pokemon.image}
-                      alt="404"
-                      aria-label={pokemon.name}
-                      className="w-8"
-                    />
-                    <span>{pokemon.name}</span>
-                  </div>
-                </Link>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Total {pokemons.length}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {pokemons.map((pokemon) => (
+                <SidebarMenuItem key={pokemon.id}>
+                  <Link to={`/poc/pokemons/${pokemon.id}`}>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={pokemon.image}
+                        alt="404"
+                        aria-label={pokemon.name}
+                        className="w-8"
+                      />
+                      <span>{pokemon.name}</span>
+                    </div>
+                  </Link>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t py-4 font-bold">
         React Router x shadcn/ui
