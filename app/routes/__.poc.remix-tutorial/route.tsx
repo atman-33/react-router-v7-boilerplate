@@ -12,7 +12,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '~/components/shadcn/ui/sidebar';
-import type { PokemonResourceList } from '../__.poc.sample/types/pokemon';
+import type { PokemonResourceList } from '../__.poc._index/types/pokemon';
 import type { Route } from './+types/route';
 import RemixTutorialSidebar from './components/remix-tutorial-sidebar';
 
