@@ -7,8 +7,8 @@ const main = async () => {
   // 既存のDBデータを削除
   await prisma.contact.deleteMany();
 
-  // Contactのダミーデータを100個追加
-  const contacts = Array.from({ length: 100 }).map(() => ({
+  // Contactのダミーデータを追加
+  const contacts = Array.from({ length: 10 }).map(() => ({
     first: faker.person.firstName(),
     last: faker.person.lastName(),
     avatar: faker.image.avatar(),
