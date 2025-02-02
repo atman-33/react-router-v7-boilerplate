@@ -22,6 +22,7 @@ const PocPage = () => {
         <LinkButton to="/poc/sample/ssg" label="Go to Sample SSG" />
         <LinkButton to="/poc/sample/ssr-csr" label="Sample SSR & CSR" />
         <LinkButton to="/poc/pokemons" label="Pokemon App" />
+        <LinkButton to="/poc/contacts" label="Remix Tutorial" />
       </div>
     </div>
   );
