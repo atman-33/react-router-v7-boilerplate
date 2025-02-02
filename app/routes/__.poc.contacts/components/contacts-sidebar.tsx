@@ -1,6 +1,6 @@
 import type { Contact } from '@prisma/client';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Form, Link } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import {
   Sidebar,
@@ -32,16 +32,25 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
         </Link>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
+        <SidebarGroup className="sticky top-0 z-10 bg-primary">
           <SidebarGroupContent className="flex gap-2">
             <SearchInput value={query} onInputChange={setQuery} />
-            <Button variant="default">New</Button>
+            <Form action="./" method="post">
+              <Button
+                variant="outline"
+                type="submit"
+                name="_action"
+                value="new"
+              >
+                New
+              </Button>
+            </Form>
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Total {contacts.length}</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="flex flex-col gap-4">
               {contacts.map((contact) => (
                 <SidebarMenuItem key={contact.id}>
                   <Link to={`/poc/contacts/${contact.id}`}>
@@ -62,7 +71,7 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t py-4 font-bold">
-        React Router x shadcn/ui
+        Remix Contacts
       </SidebarFooter>
     </Sidebar>
   );

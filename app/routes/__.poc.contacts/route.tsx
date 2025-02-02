@@ -21,6 +21,27 @@ export const loader = async () => {
   return { contacts };
 };
 
+export const action = async ({ request }: Route.ActionArgs) => {
+  const formData = await request.formData();
+  const { _action } = Object.fromEntries(formData);
+
+  switch (_action) {
+    case 'new': {
+      const newContact = {
+        first: 'No',
+        last: 'Name',
+        avatar: '',
+        twitter: '',
+        notes: '',
+        favorite: false,
+      };
+
+      await prisma.contact.create({ data: newContact });
+      // TODO: 編集ページにリダイレクトする処理を追加
+    }
+  }
+};
+
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { contacts } = loaderData;
   return (
