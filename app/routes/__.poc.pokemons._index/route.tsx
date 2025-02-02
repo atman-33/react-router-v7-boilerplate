@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from '~/components/shadcn/ui/card';
 
-const RemixTutorialTopPage = () => {
+const PokemonsPage = () => {
   const pokemons = [
     {
       name: 'bulbasaur',
@@ -71,4 +71,4 @@ const RemixTutorialTopPage = () => {
   );
 };
 
-export default RemixTutorialTopPage;
+export default PokemonsPage;

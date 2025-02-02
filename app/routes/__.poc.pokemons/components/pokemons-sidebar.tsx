@@ -12,11 +12,11 @@ import {
 } from '~/components/shadcn/ui/sidebar';
 import type { PokemonSummary } from '~/routes/__.poc._index/types/pokemon';
 
-interface PokemonSidebarProps {
+interface PokemonsSidebarProps {
   pokemons: PokemonSummary[];
 }
 
-const PokemonSidebar = ({ pokemons }: PokemonSidebarProps) => {
+const PokemonsSidebar = ({ pokemons }: PokemonsSidebarProps) => {
   return (
     <Sidebar>
       <SidebarHeader className="border-b">
@@ -61,4 +61,4 @@ const PokemonSidebar = ({ pokemons }: PokemonSidebarProps) => {
   );
 };
 
-export { PokemonSidebar };
+export { PokemonsSidebar };
