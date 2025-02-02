@@ -13,7 +13,8 @@
     "db:migrate:dev": "npx env-cmd -f .env npx prisma migrate dev",
     "db:push:dev": "npx env-cmd -f .env npx prisma db push",
     "db:generate": "npx env-cmd -f .env npx prisma generate",
-    "db:studio": "npx env-cmd -f .env npx prisma studio", 
+    "db:studio": "npx env-cmd -f .env npx prisma studio",
+    "db:seed": "npx tsx prisma/seed.ts",
     "--- TEST SECTION ---": "--- --- --- --- ---",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
@@ -46,6 +47,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@chromatic-com/storybook": "^3.2.4",
+    "@faker-js/faker": "^9.4.0",
     "@react-router/dev": "^7.1.3",
     "@storybook/addon-essentials": "^8.5.1",
     "@storybook/addon-interactions": "^8.5.1",
