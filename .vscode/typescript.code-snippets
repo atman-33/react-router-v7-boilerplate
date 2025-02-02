@@ -1,0 +1,28 @@
+{
+  "Remix Loader and Contact Page": {
+    "prefix": "rr-loader",
+    "body": [
+      "import { prisma } from '~/.server/lib/prisma-client';",
+      "import type { Route } from './+types/route';",
+      "",
+      "export const loader = async ({ params }: Route.LoaderArgs) => {",
+      "  const contact = await prisma.contact.findUnique({",
+      "    where: { id: params.contactId },",
+      "  });",
+      "  return { contact };",
+      "};",
+      "",
+      "const ContactPage: React.FC<Route.ComponentProps> = ({ loaderData }) => {",
+      "  const { contact } = loaderData;",
+      "  return (",
+      "    <div>",
+      "      <h1>{contact?.id}</h1>",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default ContactPage;"
+    ],
+    "description": "Remix loader function and ContactPage component"
+  }
+}
