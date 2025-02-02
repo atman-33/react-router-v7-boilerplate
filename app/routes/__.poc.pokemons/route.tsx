@@ -59,7 +59,7 @@ const PokemonsLayout = ({ loaderData }: Route.ComponentProps) => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Remix Tutorial</BreadcrumbPage>
+                  <BreadcrumbPage>Pokemon App</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
