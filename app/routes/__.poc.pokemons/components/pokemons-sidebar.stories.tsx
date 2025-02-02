@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router';
 import { SidebarProvider } from '~/components/shadcn/ui/sidebar';
-import { PokemonSidebar } from './pokemon-sidebar';
+import { PokemonsSidebar } from './pokemons-sidebar';
 
-const meta: Meta<typeof PokemonSidebar> = {
+const meta: Meta<typeof PokemonsSidebar> = {
   title: 'Components/PokemonSidebar',
-  component: PokemonSidebar,
+  component: PokemonsSidebar,
   decorators: [
     (Story) => (
       <BrowserRouter>
@@ -19,7 +19,7 @@ const meta: Meta<typeof PokemonSidebar> = {
 
 export default meta;
 
-type Story = StoryObj<typeof PokemonSidebar>;
+type Story = StoryObj<typeof PokemonsSidebar>;
 
 export const Default: Story = {
   args: {
