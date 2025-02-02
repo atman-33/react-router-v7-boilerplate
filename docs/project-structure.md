@@ -44,6 +44,30 @@ app
 +-- utils             # 共有ユーティリティ関数
 ```
 
+### app/components
+
+`components`直下は、コンポーネントファイルを配置する。必要に応じてフォルダを準備すること。
+
+```sh
+app/components
+|
++-- shadcn
+|   |
+|   +-- ui              # shadcn/uiコンポーネント
+|       |
+|       +-- button.tsx
+|       ...
+|
++-- shared              # カスタムの共通コンポーネント       
+    |
+    +-- comform         # conformライブラリ専用コンポーネント用フォルダ
+    |
+    +-- image.tsx
+    +-- loading-dots.tsx
+
+    ...
+```
+
 ### lib
 
 `lib`直下にはフォルダを配置し、各フォルダ内にエクスポート用の`index.ts`ファイルを配置する。
