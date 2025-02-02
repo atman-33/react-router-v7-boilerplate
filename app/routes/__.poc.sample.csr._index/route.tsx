@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
-import type { PokeResourceList } from '../__.poc/types/poke';
+import type { PokemonResourceList } from '../__.poc._index/types/pokemon';
 import type { Route } from './+types/route';
 
 // clientLoaderは、クライアントサイドでのみ実行される
@@ -15,7 +15,7 @@ export const clientLoader = async ({ request }: Route.ClientLoaderArgs) => {
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`,
   );
-  const data = (await res.json()) as PokeResourceList;
+  const data = (await res.json()) as PokemonResourceList;
 
   return { data, offset, limit };
 };
@@ -31,7 +31,7 @@ const PocSampleCsrPage = ({ loaderData }: Route.ComponentProps) => {
   const prevOffset = Number.parseInt(offset) - Number.parseInt(limit);
 
   return (
-    <div className="container mx-auto flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4">
       <h1 className="font-bold text-xl">Sample CSR Page</h1>
       <h2 className="text-lg">Pokemon List</h2>
       <ul>

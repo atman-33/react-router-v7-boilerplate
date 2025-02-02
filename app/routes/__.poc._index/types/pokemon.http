@@ -1,0 +1,9 @@
+@offset=0
+@limit=2
+@id=1
+
+### Pokemon APIResourceList
+GET https://pokeapi.co/api/v2/pokemon?offset={{offset}}&limit={{limit}}
+
+### Pokemon Detail
+https://pokeapi.co/api/v2/pokemon/{{id}}/
