@@ -17,7 +17,7 @@ import type { Route } from './+types/route';
 import { ContactsSidebar } from './components/contacts-sidebar';
 
 export const loader = async () => {
-  const contacts = await prisma.contact.findMany({});
+  const contacts = await prisma.contact.findMany({ orderBy: { first: 'asc' } });
   return { contacts };
 };
 
