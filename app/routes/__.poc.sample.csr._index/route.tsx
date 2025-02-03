@@ -46,20 +46,22 @@ const PocSampleCsrPage = ({ loaderData }: Route.ComponentProps) => {
       </ul>
       <div className="flex gap-4">
         {/* NOTE: Linkにdisabledプロパティがないため、pointer-events-noneで代用 */}
-        <div className={data.previous ? '' : 'pointer-events-none'}>
-          <Link to={`?offset=${prevOffset}&limit=${limit}`}>
-            <Button className="w-24" disabled={!data.previous}>
-              Previous
-            </Button>
+        <Button asChild className="w-24">
+          <Link
+            to={data.previous ? `?offset=${prevOffset}&limit=${limit}` : ''}
+            className={!data.previous ? 'pointer-events-none opacity-50' : ''}
+          >
+            Previous
           </Link>
-        </div>
-        <div className={data.next ? '' : 'pointer-events-none'}>
-          <Link to={`?offset=${nextOffset}&limit=${limit}`}>
-            <Button className="w-24" disabled={!data.next}>
-              Next
-            </Button>
+        </Button>
+        <Button asChild className="w-24">
+          <Link
+            to={data.next ? `?offset=${nextOffset}&limit=${limit}` : ''}
+            className={!data.next ? 'pointer-events-none opacity-50' : ''}
+          >
+            Next
           </Link>
-        </div>
+        </Button>
       </div>
     </div>
   );
