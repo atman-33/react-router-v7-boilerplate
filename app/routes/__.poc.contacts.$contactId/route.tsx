@@ -1,4 +1,4 @@
-import { Form } from 'react-router';
+import { Form, Outlet } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import { Button } from '~/components/shadcn/ui/button';
 import type { Route } from './+types/route';
@@ -84,6 +84,7 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
           </Form>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
