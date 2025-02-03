@@ -63,7 +63,7 @@ const EditContactPage = ({ loaderData }: Route.ComponentProps) => {
       <Textarea defaultValue={contact.notes ?? ''} name="notes" rows={6} />
       <div className="col-start-2 flex gap-4">
         <Button type="submit">Save</Button>
-        <Button type="button" variant="secondary">
+        <Button type="button" variant="outline">
           Cancel
         </Button>
       </div>
