@@ -53,6 +53,8 @@ app/components
 |
 +-- shadcn
 |   |
+|   +-- custom          # shadcn/uiコンポーネントのカスタマイズUI
+|   |
 |   +-- ui              # shadcn/uiコンポーネント
 |       |
 |       +-- button.tsx
