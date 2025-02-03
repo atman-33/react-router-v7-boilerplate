@@ -4,6 +4,14 @@
 
 - TypeScriptの関数は、アロー関数で記述すること。
 
+## ボタン
+
+### `variant`使い分け
+
+- 通常ボタン（e.g. New, Edit, Save）: default
+- 注意ボタン（e.g. Delete）: destructive
+- キャンセルボタン（e.g. Cancel）: outline
+
 ## 記述方法
 
 書き方は、以下の記述例を参考にすること。
