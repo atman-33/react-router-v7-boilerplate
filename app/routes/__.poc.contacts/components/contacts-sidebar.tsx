@@ -32,12 +32,12 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
         </Link>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup className="sticky top-0 z-10 bg-primary">
+        <SidebarGroup className="sticky top-0 z-10 bg-primary-foreground">
           <SidebarGroupContent className="flex gap-2">
             <SearchInput value={query} onInputChange={setQuery} />
             <Form action="./" method="post">
               <Button
-                variant="outline"
+                variant="default"
                 type="submit"
                 name="_action"
                 value="new"
@@ -61,7 +61,15 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
                         aria-label={contact.id}
                         className="w-8"
                       />
-                      <span>{`${contact.first} ${contact.last}`}</span>
+                      <span>
+                        {contact.first || contact.last ? (
+                          <>
+                            {contact.first} {contact.last}
+                          </>
+                        ) : (
+                          <i>No Name</i>
+                        )}
+                      </span>
                     </div>
                   </Link>
                 </SidebarMenuItem>

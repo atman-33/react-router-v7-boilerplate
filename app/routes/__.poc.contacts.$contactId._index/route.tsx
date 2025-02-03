@@ -24,7 +24,7 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
   }
 
   return (
-    <div className="flex gap-12 px-12 py-8">
+    <div className="flex gap-12">
       <div>
         <img
           alt={`${contact.first} ${contact.last} avatar`}
@@ -62,12 +62,12 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
         {contact.notes ? <p>{contact.notes}</p> : null}
 
         <div className="flex gap-4">
-          <Form action="_edit">
+          <Form action="edit">
             <Button type="submit">Edit</Button>
           </Form>
 
           <Form
-            action="_destroy"
+            action="destroy"
             method="post"
             onSubmit={(event) => {
               const response = confirm(

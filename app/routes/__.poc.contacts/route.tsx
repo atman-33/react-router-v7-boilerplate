@@ -28,8 +28,8 @@ export const action = async ({ request }: Route.ActionArgs) => {
   switch (_action) {
     case 'new': {
       const newContact = {
-        first: 'No',
-        last: 'Name',
+        first: '',
+        last: '',
         avatar: '',
         twitter: '',
         notes: '',
@@ -77,7 +77,9 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <Outlet />
+        <div className="px-12 py-8">
+          <Outlet />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

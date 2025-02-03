@@ -1,6 +1,6 @@
 const ContactsPage = () => {
   return (
-    <div className="p-4">
+    <div>
       <h1 className="font-bold text-2xl">Remix Tutorial</h1>
       <p className="mt-2">
         This tutorial is implemented using React Router v7. For more details,
