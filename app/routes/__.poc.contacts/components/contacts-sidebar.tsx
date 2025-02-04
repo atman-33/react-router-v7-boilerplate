@@ -1,6 +1,6 @@
 import type { Contact } from '@prisma/client';
 import { useState } from 'react';
-import { Form, Link } from 'react-router';
+import { Form, Link, NavLink } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import {
   Sidebar,
@@ -53,7 +53,16 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
             <SidebarMenu className="flex flex-col gap-4">
               {contacts.map((contact) => (
                 <SidebarMenuItem key={contact.id}>
-                  <Link to={`/poc/contacts/${contact.id}`}>
+                  <NavLink
+                    to={`/poc/contacts/${contact.id}`}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? 'font-bold text-blue-500'
+                        : isPending
+                          ? 'text-yellow-500'
+                          : 'text-gray-500'
+                    }
+                  >
                     <div className="flex items-center gap-2">
                       <img
                         src={contact.avatar}
@@ -71,7 +80,7 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
                         )}
                       </span>
                     </div>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
