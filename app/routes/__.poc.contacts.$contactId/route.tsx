@@ -25,16 +25,16 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
 
   return (
     <>
-      <div className="flex gap-12">
+      {/* 通常は横並び。画面幅が小さくなると縦並び */}
+      <div className="flex flex-col gap-12 sm:flex-row">
         <div>
           <img
             alt={`${contact.first} ${contact.last} avatar`}
             key={contact.avatar}
             src={contact.avatar}
-            className="w-60 rounded-3xl"
+            className="h-auto min-w-60 max-w-60 rounded-3xl"
           />
         </div>
-
         <div className="flex flex-col gap-6">
           <h1 className="flex gap-4 font-extrabold text-3xl">
             {contact.first || contact.last ? (
