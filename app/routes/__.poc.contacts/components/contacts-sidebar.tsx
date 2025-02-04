@@ -50,36 +50,42 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
         <SidebarGroup>
           <SidebarGroupLabel>Total {contacts.length}</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="flex flex-col gap-4">
+            <SidebarMenu className="flex flex-col gap-2">
               {contacts.map((contact) => (
-                <SidebarMenuItem key={contact.id}>
+                <SidebarMenuItem key={contact.id} className="">
                   <NavLink
                     to={`/poc/contacts/${contact.id}`}
                     className={({ isActive, isPending }) =>
                       isActive
-                        ? 'font-bold text-blue-500'
+                        ? 'rounded-lg bg-blue-600 font-bold text-white'
                         : isPending
-                          ? 'text-yellow-500'
-                          : 'text-gray-500'
+                          ? 'text-blue-400'
+                          : 'text-primary'
                     }
                   >
-                    <div className="flex items-center gap-2">
-                      <img
-                        src={contact.avatar}
-                        alt="404"
-                        aria-label={contact.id}
-                        className="w-8"
-                      />
-                      <span>
-                        {contact.first || contact.last ? (
-                          <>
-                            {contact.first} {contact.last}
-                          </>
-                        ) : (
-                          <i>No Name</i>
-                        )}
-                      </span>
-                    </div>
+                    {/* NOTE: bg-inherit text-inherit を使ってNavLinkのStyleを継承する */}
+                    <Button
+                      variant="link"
+                      className="flex w-full justify-start bg-inherit text-inherit hover:no-underline"
+                    >
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={contact.avatar}
+                          aria-label={contact.id}
+                          className="w-8"
+                          alt={`${contact.first} ${contact.last} avatar`}
+                        />
+                        <span>
+                          {contact.first || contact.last ? (
+                            <>
+                              {contact.first} {contact.last}
+                            </>
+                          ) : (
+                            <i>No Name</i>
+                          )}
+                        </span>
+                      </div>
+                    </Button>
                   </NavLink>
                 </SidebarMenuItem>
               ))}
