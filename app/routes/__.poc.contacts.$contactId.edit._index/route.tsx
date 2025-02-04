@@ -1,4 +1,4 @@
-import { Form, Link } from 'react-router';
+import { Link, redirect, useFetcher } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import { DialogContentNoCloseButton } from '~/components/shadcn/custom/dialog-content-no-close-button';
 import { Button } from '~/components/shadcn/ui/button';
@@ -15,8 +15,22 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return { contact };
 };
 
+export const action = async ({ params, request }: Route.ActionArgs) => {
+  const formData = await request.formData();
+  // NOTE: FormDataから全てのFormフィールド（name属性を持つ）の名前と値をオブジェクトに変換
+  const updates = Object.fromEntries(formData);
+  // console.log({ ...updates });
+  await prisma.contact.update({
+    where: { id: params.contactId },
+    data: { ...updates },
+  });
+
+  return redirect(`/poc/contacts/${params.contactId}`);
+};
+
 const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
   const { contact } = loaderData;
+  const fetcher = useFetcher();
 
   if (!contact) {
     return <div>not found</div>;
@@ -26,7 +40,7 @@ const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
     <Dialog open={true}>
       {/* Dialogの横幅は、max-w-xxxで制御する */}
       <DialogContentNoCloseButton className="max-w-2xl">
-        <Form
+        <fetcher.Form
           key={contact.id}
           method="post"
           className="grid grid-cols-[auto,1fr] items-center gap-4"
@@ -67,12 +81,20 @@ const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
           <Label className="mt-2 self-start">Notes</Label>
           <Textarea defaultValue={contact.notes ?? ''} name="notes" rows={6} />
           <div className="col-start-2 flex gap-4">
-            <Button type="submit">Save</Button>
+            {/* fetcherが処理中（submitting/loading）の時はdisableにする */}
+            <Button
+              type="submit"
+              disabled={
+                fetcher.state === 'submitting' || fetcher.state === 'loading'
+              }
+            >
+              Save
+            </Button>
             <Button type="button" variant="outline" asChild>
               <Link to={'../'}>Cancel</Link>
             </Button>
           </div>
-        </Form>
+        </fetcher.Form>
       </DialogContentNoCloseButton>
     </Dialog>
   );
