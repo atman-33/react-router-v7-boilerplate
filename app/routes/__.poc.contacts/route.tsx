@@ -17,8 +17,13 @@ import type { Route } from './+types/route';
 import { ContactsSidebar } from './components/contacts-sidebar';
 
 export const loader = async () => {
-  const contacts = await prisma.contact.findMany({ orderBy: { first: 'asc' } });
-  return { contacts };
+  // NOTE: orderByだと大文字が先に並び、小文字が後で並んでしまう。
+  // const contacts = await prisma.contact.findMany({ orderBy: { first: 'asc' } });
+  const contacts = await prisma.contact.findMany({});
+  const sortedContacts = contacts.sort((a, b) =>
+    a.first.toLowerCase().localeCompare(b.first.toLowerCase()),
+  );
+  return { contacts: sortedContacts };
 };
 
 export const action = async ({ request }: Route.ActionArgs) => {
