@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router';
+import { Link, Outlet, redirect } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import {
   Breadcrumb,
@@ -41,8 +41,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
         favorite: false,
       };
 
-      await prisma.contact.create({ data: newContact });
-      // TODO: 編集ページにリダイレクトする処理を追加
+      const res = await prisma.contact.create({ data: newContact });
+      // 編集ページにリダイレクト
+      return redirect(`/poc/contacts/${res.id}/edit`);
     }
   }
 };
