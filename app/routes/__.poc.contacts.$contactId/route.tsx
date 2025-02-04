@@ -1,6 +1,7 @@
 import { Form, Outlet } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import { Button } from '~/components/shadcn/ui/button';
+import { Image } from '~/components/shared/image';
 import type { Route } from './+types/route';
 import { Favorite } from './components/favorite';
 
@@ -28,7 +29,7 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
       {/* 通常は横並び。画面幅が小さくなると縦並び */}
       <div className="flex flex-col gap-12 sm:flex-row">
         <div>
-          <img
+          <Image
             alt={`${contact.first} ${contact.last} avatar`}
             key={contact.avatar}
             src={contact.avatar}

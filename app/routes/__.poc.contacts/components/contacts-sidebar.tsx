@@ -13,6 +13,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from '~/components/shadcn/ui/sidebar';
+import { Image } from '~/components/shared/image';
 import { SearchInput } from '~/components/shared/search-input';
 
 interface ContactsSidebarProps {
@@ -69,11 +70,11 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
                       className="flex w-full justify-start bg-inherit text-inherit hover:no-underline"
                     >
                       <div className="flex items-center gap-2">
-                        <img
+                        <Image
                           src={contact.avatar}
                           aria-label={contact.id}
-                          className="w-8"
                           alt={`${contact.first} ${contact.last} avatar`}
+                          className="w-6"
                         />
                         <span>
                           {contact.first || contact.last ? (
