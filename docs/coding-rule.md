@@ -1,29 +1,29 @@
-# **コーディング規約**
+# コーディング規約
 
-## **1. 共通ルール**
+## 共通ルール
 
-### **1.1 ファイル命名規則**
+### ファイル命名規則
 
 - すべて **ケバブケース（kebab-case）** で統一すること。
 
-**例:**
+e.g.  
 
 ```sh
 button.tsx
 auth-utils.ts
 ```
 
-### **1.2 関数の記述方法**
+### 関数の記述方法
 
 - TypeScript の関数は **アロー関数** で記述すること。
 
-### **1.3 メソッド命名規則**
+### メソッド命名規則
 
-#### **`handle〇〇`（イベントハンドラの命名）**
+#### `handle〇〇`（イベントハンドラの命名）
 
 - ボタンやフォームのイベントを処理するメソッドは `handle + 対象 + Event内容` の形式で命名すること。
 
-**例:**
+e.g.  
 
 ```tsx
 const handleSubmitForm = () => { /* 処理 */ };
@@ -32,20 +32,20 @@ const handleClickButton = () => { /* 処理 */ };
 
 ---
 
-## **2. React に関するルール**
+## React に関するルール
 
-### **2.1 React Router**
+### React Router
 
 - `action` を呼び出す際、クライアントサイドでは **`useFetcher` と `fetcher.Form` を使用すること**。
 - **理由:** `<Form>` の `submit` では `submitting/loading` の状態を取得できないため。
 
 ---
 
-## **3. UIコンポーネント**
+## UIコンポーネント
 
-### **3.1 ボタン（Button）**
+### ボタン（Button）
 
-#### **3.1.1 `variant` の使い分け**
+#### `variant` の使い分け
 
 ボタンの **`variant`** を以下のルールで使い分ける。
 
@@ -55,6 +55,26 @@ const handleClickButton = () => { /* 処理 */ };
 | **セカンダリーボタン (`secondary`)** | 補完的なアクション | 詳細、次へ、追加の設定 |
 | **破壊的ボタン (`destructive`)** | 取り返しのつかないアクション（警告が必要） | 削除、アカウント削除、データ消去 |
 | **アウトラインボタン (`outline`)** | 補助的なアクション（目立たず控えめ） | キャンセル、戻る、後で保存 |
+
+### ナビリンク（NaviLink）
+
+`isActive`と`isPending`に対するスタイルを以下のルールで使い分ける。
+
+- isActive = true: 濃い色の文字、背景色有り
+- isActive = false & isPending = true: 薄い色の文字
+- isActive = false & isPending = false: デフォルト色の文字
+
+e.g.  
+
+```tsx
+className={({ isActive, isPending }) =>
+  isActive
+    ? 'rounded-lg bg-blue-600 font-bold text-white'
+    : isPending
+      ? 'text-blue-400'
+      : 'text-primary'
+}
+```
 
 ---
 
