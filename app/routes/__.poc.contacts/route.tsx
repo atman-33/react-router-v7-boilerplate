@@ -51,6 +51,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { contacts } = loaderData;
+  // NOTE: useNavigationでナビゲーションの状態（loadingなど）を取得
   const navigation = useNavigation();
 
   return (
