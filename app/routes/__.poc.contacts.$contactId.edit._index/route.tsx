@@ -1,4 +1,4 @@
-import { Link, redirect, useFetcher } from 'react-router';
+import { redirect, useFetcher, useNavigate } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import { DialogContentNoCloseButton } from '~/components/shadcn/custom/dialog-content-no-close-button';
 import { Button } from '~/components/shadcn/ui/button';
@@ -31,6 +31,8 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
 const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
   const { contact } = loaderData;
   const fetcher = useFetcher();
+  // NOTE: useNavigateはブラウザ履歴で戻る操作をするために利用
+  const navigate = useNavigate();
 
   if (!contact) {
     return <div>not found</div>;
@@ -90,8 +92,13 @@ const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
             >
               Save
             </Button>
-            <Button type="button" variant="outline" asChild>
-              <Link to={'../'}>Cancel</Link>
+            {/* NOTE: <button type="button">は、ボタンがフォームを送信するのを防ぐHTMLの方法 */}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => navigate(-1)}
+            >
+              Cancel
             </Button>
           </div>
         </fetcher.Form>
