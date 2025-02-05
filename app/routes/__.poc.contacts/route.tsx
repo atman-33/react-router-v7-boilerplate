@@ -13,7 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '~/components/shadcn/ui/sidebar';
-import { LoadingDots } from '~/components/shared/loading-dots';
+import { Overlay } from '~/components/shared/overlay';
 import type { Route } from './+types/route';
 import { ContactsSidebar } from './components/contacts-sidebar';
 
@@ -88,11 +88,8 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
         </header>
         <div className="px-12 py-8">
           {navigation.state === 'loading' ||
-          navigation.state === 'submitting' ? (
-            <LoadingDots />
-          ) : (
-            <Outlet />
-          )}
+            (navigation.state === 'submitting' && <Overlay />)}
+          <Outlet />
         </div>
       </SidebarInset>
     </SidebarProvider>
