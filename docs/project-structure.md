@@ -138,14 +138,18 @@ app/routes
 |   +-- route.tsx       # ページファイル
 |
 +-- _app.todos.$todoId.edit._index  # （例）todosのIDに対する編集ページ
+|   |
+|   +-- components      # ページで利用するコンポーネント
+|   |
+|   +-- hooks           # ページで利用するフック
+|   |
+|   +-- stores          # ページで利用するストア情報
+|   |
+|   +-- route.tsx       # ページファイル
+|
++-- _app.todos.$todoId_.delete      # （例）todosのIDを削除するリソースルート
     |
-    +-- components      # ページで利用するコンポーネント
-    |
-    +-- hooks           # ページで利用するフック
-    |
-    +-- stores          # ページで利用するストア情報
-    |
-    +-- route.tsx       # ページファイル
+    +-- route.tsx       # リソースルートファイル
 ```
 
 ## 参考
