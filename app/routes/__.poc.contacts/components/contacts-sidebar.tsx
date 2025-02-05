@@ -1,6 +1,6 @@
 import type { Contact } from '@prisma/client';
 import { useEffect } from 'react';
-import { Form, Link, NavLink } from 'react-router';
+import { Form, Link, NavLink, useSubmit } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import {
   Sidebar,
@@ -22,6 +22,9 @@ interface ContactsSidebarProps {
 }
 
 const ContactsSidebar = ({ contacts, q }: ContactsSidebarProps) => {
+  // NOTE: useSubmitでページ遷移を伴うForm送信を行う
+  const submit = useSubmit();
+
   useEffect(() => {
     const searchField = document.getElementById('q');
     if (searchField instanceof HTMLInputElement) {
@@ -41,7 +44,11 @@ const ContactsSidebar = ({ contacts, q }: ContactsSidebarProps) => {
       <SidebarContent>
         <SidebarGroup className="sticky top-0 z-10 bg-primary-foreground">
           <SidebarGroupContent className="flex gap-2">
-            <Form action="./" method="get">
+            <Form
+              action="./"
+              method="get"
+              onChange={(e) => submit(e.currentTarget)}
+            >
               <SearchInput
                 type="search"
                 defaultValue={q || ''}

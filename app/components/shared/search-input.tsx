@@ -7,7 +7,7 @@ interface SearchInputProps {
   value?: string | number | readonly string[] | undefined;
   defaultValue?: string | number | readonly string[] | undefined;
   placeholder?: string | undefined;
-  onInputChange?: (value: string) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -23,7 +23,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   defaultValue,
   placeholder,
-  onInputChange,
+  onChange: handleInputChange,
 }) => {
   const handleCancelClick = () => {
     if (!id) {
@@ -33,6 +33,12 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     const input = document.getElementById(id);
     if (input instanceof HTMLInputElement) {
       input.value = '';
+
+      // Formのsubmitイベントを手動でトリガー
+      const form = input.closest('form');
+      if (form) {
+        form.dispatchEvent(new Event('submit', { bubbles: true }));
+      }
     }
   };
 
@@ -46,7 +52,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         value={value}
         defaultValue={defaultValue || ''}
         placeholder={placeholder}
-        onChange={(e) => onInputChange?.(e.target.value)}
+        onChange={(e) => (handleInputChange ? handleInputChange(e) : undefined)}
       />
       <div className="absolute inset-y-0 left-1 flex items-center">
         <span className="text-lg">🔍</span>
