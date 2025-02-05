@@ -1,4 +1,4 @@
-import { Link, Outlet, redirect } from 'react-router';
+import { Link, Outlet, redirect, useNavigation } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import {
   Breadcrumb,
@@ -13,6 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '~/components/shadcn/ui/sidebar';
+import { LoadingDots } from '~/components/shared/loading-dots';
 import type { Route } from './+types/route';
 import { ContactsSidebar } from './components/contacts-sidebar';
 
@@ -50,6 +51,8 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { contacts } = loaderData;
+  const navigation = useNavigation();
+
   return (
     <SidebarProvider
       style={
@@ -84,7 +87,12 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
           </Breadcrumb>
         </header>
         <div className="px-12 py-8">
-          <Outlet />
+          {navigation.state === 'loading' ||
+          navigation.state === 'submitting' ? (
+            <LoadingDots />
+          ) : (
+            <Outlet />
+          )}
         </div>
       </SidebarInset>
     </SidebarProvider>
