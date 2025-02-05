@@ -1,5 +1,5 @@
 import type { Contact } from '@prisma/client';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Form, Link, NavLink } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import {
@@ -18,10 +18,16 @@ import { SearchInput } from '~/components/shared/search-input';
 
 interface ContactsSidebarProps {
   contacts: Contact[];
+  q?: string | undefined | null;
 }
 
-const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
-  const [query, setQuery] = useState('');
+const ContactsSidebar = ({ contacts, q }: ContactsSidebarProps) => {
+  useEffect(() => {
+    const searchField = document.getElementById('q');
+    if (searchField instanceof HTMLInputElement) {
+      searchField.value = q || '';
+    }
+  }, [q]);
 
   return (
     <Sidebar>
@@ -35,7 +41,15 @@ const ContactsSidebar = ({ contacts }: ContactsSidebarProps) => {
       <SidebarContent>
         <SidebarGroup className="sticky top-0 z-10 bg-primary-foreground">
           <SidebarGroupContent className="flex gap-2">
-            <SearchInput value={query} onInputChange={setQuery} />
+            <Form action="./" method="get">
+              <SearchInput
+                type="search"
+                defaultValue={q || ''}
+                id="q"
+                name="q"
+                placeholder="Search"
+              />
+            </Form>
             <Form action="./" method="post">
               <Button
                 variant="default"

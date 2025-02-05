@@ -17,14 +17,23 @@ import { Overlay } from '~/components/shared/overlay';
 import type { Route } from './+types/route';
 import { ContactsSidebar } from './components/contacts-sidebar';
 
-export const loader = async () => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   // NOTE: orderByだと大文字が先に並び、小文字が後で並んでしまう。
   // const contacts = await prisma.contact.findMany({ orderBy: { first: 'asc' } });
   const contacts = await prisma.contact.findMany({});
   const sortedContacts = contacts.sort((a, b) =>
     a.first.toLowerCase().localeCompare(b.first.toLowerCase()),
   );
-  return { contacts: sortedContacts };
+
+  const url = new URL(request.url);
+  const q = url.searchParams.get('q');
+  const filteredContacts = sortedContacts.filter((contact) =>
+    q
+      ? contact.first.toLowerCase().includes(q.toLowerCase()) ||
+        contact.last.toLowerCase().includes(q.toLowerCase())
+      : true,
+  );
+  return { contacts: filteredContacts, q };
 };
 
 export const action = async ({ request }: Route.ActionArgs) => {
@@ -50,7 +59,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 };
 
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
-  const { contacts } = loaderData;
+  const { contacts, q } = loaderData;
   // NOTE: useNavigationでナビゲーションの状態（loadingなど）を取得
   const navigation = useNavigation();
 
@@ -63,7 +72,7 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
         } as React.CSSProperties
       }
     >
-      <ContactsSidebar contacts={contacts} />
+      <ContactsSidebar contacts={contacts} q={q} />
       <SidebarInset>
         <header className="flex h-10 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
