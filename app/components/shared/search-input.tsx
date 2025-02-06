@@ -57,7 +57,16 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         onChange={(e) => (handleInputChange ? handleInputChange(e) : undefined)}
       />
       <div className="absolute inset-y-0 left-1 flex items-center">
-        {searching ? <Spinner /> : <span className="text-lg">🔍</span>}
+        <div
+          className={`text-lg transition-opacity duration-1000 ${searching ? 'opacity-0' : 'opacity-100'}`}
+        >
+          🔍
+        </div>
+        <div
+          className={`absolute left-0 transition-opacity duration-1000 ${searching ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <Spinner />
+        </div>
       </div>
       <button
         type="button"
