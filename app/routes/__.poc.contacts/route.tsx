@@ -58,10 +58,24 @@ export const action = async ({ request }: Route.ActionArgs) => {
   }
 };
 
+// TODO: 検索スピナーの追加　から
+
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { contacts, q } = loaderData;
   // NOTE: useNavigationでナビゲーションの状態（loadingなど）を取得
   const navigation = useNavigation();
+
+  // NOTE: データ読み込み中は、navigation.locationにデータが格納される
+  // NOTE: navigation.location.searchでクエリパラメータ（'q=abc' etc.）を取得
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has('q');
+
+  // NOTE: navigation.locationの中身確認
+  // useEffect(() => {
+  //   console.log({ location: navigation.location });
+  //   console.log({ search: navigation?.location?.search });
+  // }, [navigation.location]);
 
   return (
     <SidebarProvider
@@ -72,7 +86,7 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
         } as React.CSSProperties
       }
     >
-      <ContactsSidebar contacts={contacts} q={q} />
+      <ContactsSidebar contacts={contacts} q={q} searching={searching} />
       <SidebarInset>
         <header className="flex h-10 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -97,8 +111,8 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
           </Breadcrumb>
         </header>
         <div className="px-12 py-8">
-          {navigation.state === 'loading' ||
-            (navigation.state === 'submitting' && <Overlay />)}
+          {/* NOTE: ローディング中（検索中は除く）はオーバーレイ */}
+          {navigation.state === 'loading' && !searching && <Overlay />}
           <Outlet />
         </div>
       </SidebarInset>

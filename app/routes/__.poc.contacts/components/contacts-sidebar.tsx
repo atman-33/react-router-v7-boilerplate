@@ -19,9 +19,14 @@ import { SearchInput } from '~/components/shared/search-input';
 interface ContactsSidebarProps {
   contacts: Contact[];
   q?: string | undefined | null;
+  searching?: boolean;
 }
 
-const ContactsSidebar = ({ contacts, q }: ContactsSidebarProps) => {
+const ContactsSidebar = ({
+  contacts,
+  q,
+  searching = false,
+}: ContactsSidebarProps) => {
   // NOTE: useSubmitでページ遷移を伴うForm送信を行う
   const submit = useSubmit();
 
@@ -55,6 +60,7 @@ const ContactsSidebar = ({ contacts, q }: ContactsSidebarProps) => {
                 id="q"
                 name="q"
                 placeholder="Search"
+                searching={searching}
               />
             </Form>
             <Form action="./" method="post">
