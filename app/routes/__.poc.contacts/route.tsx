@@ -58,8 +58,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
   }
 };
 
-// TODO: 検索スピナーの追加　から
-
 const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { contacts, q } = loaderData;
   // NOTE: useNavigationでナビゲーションの状態（loadingなど）を取得
