@@ -52,7 +52,13 @@ const ContactsSidebar = ({
             <Form
               action="./"
               method="get"
-              onChange={(e) => submit(e.currentTarget)}
+              onChange={(e) => {
+                // NOTE: クエリパラメータ変更ではブラウザ履歴を追加しない
+                const isFirstSearch = q === null;
+                submit(e.currentTarget, {
+                  replace: !isFirstSearch,
+                });
+              }}
             >
               <SearchInput
                 type="search"
