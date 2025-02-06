@@ -37,7 +37,7 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
           />
         </div>
         <div className="flex flex-col gap-6">
-          <h1 className="flex gap-4 font-extrabold text-3xl">
+          <h1 className="flex items-center gap-4 font-extrabold text-3xl">
             {contact.first || contact.last ? (
               <>
                 {contact.first} {contact.last}
