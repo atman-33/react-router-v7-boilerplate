@@ -90,11 +90,13 @@ const ContactsSidebar = ({
                   <NavLink
                     to={`/poc/contacts/${contact.id}`}
                     className={({ isActive, isPending }) =>
-                      isActive
-                        ? 'rounded-lg bg-blue-600 font-bold text-white'
-                        : isPending
-                          ? 'text-blue-400'
-                          : 'text-primary'
+                      `flex items-center ${
+                        isActive
+                          ? 'rounded-lg bg-blue-600 font-bold text-white'
+                          : isPending
+                            ? 'text-blue-400'
+                            : 'text-primary'
+                      }`
                     }
                   >
                     {/* NOTE: bg-inherit text-inherit を使ってNavLinkのStyleを継承する */}
@@ -120,6 +122,9 @@ const ContactsSidebar = ({
                         </span>
                       </div>
                     </Button>
+                    {contact.favorite && (
+                      <div className="pr-2 text-xl text-yellow-500">★</div>
+                    )}
                   </NavLink>
                 </SidebarMenuItem>
               ))}
