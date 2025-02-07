@@ -34,10 +34,12 @@ const handleClickButton = () => { /* 処理 */ };
 
 ## React に関するルール
 
-### React Router
+### React RouterでActionを呼び出す場合の使い分け
 
-- `action` を呼び出す際、クライアントサイドでは **`useFetcher` と `fetcher.Form` を使用すること**。
-- **理由:** `<Form>` の `submit` では `submitting/loading` の状態を取得できないため。
+- **通常のフォーム送信（ページ遷移あり）** → `<Form>` + `<button>`
+- **非同期リクエストでページ遷移なし（AJAX）** → `fetcher.Form` or `fetcher.submit`
+- **ボタンクリックなどで `action` を呼び出す（ページ遷移なし）** → `fetcher.submit`
+- **プログラム的に `<Form>` を送信したい（ページ遷移あり）** → `useSubmit`
 
 ---
 
