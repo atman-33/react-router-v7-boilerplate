@@ -69,7 +69,7 @@ const ContactsSidebar = ({
                 searching={searching}
               />
             </Form>
-            <Form action="./" method="post">
+            <Form action="new" method="post">
               <Button
                 variant="default"
                 type="submit"
