@@ -14,7 +14,7 @@ import {
 } from '~/components/shadcn/ui/sidebar';
 import type { PokemonResourceList } from '../__.poc._index/types/pokemon';
 import type { Route } from './+types/route';
-import RemixTutorialSidebar from './components/remix-tutorial-sidebar';
+import { PokemonsSidebar } from './components/pokemons-sidebar';
 
 // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png
 
@@ -35,12 +35,12 @@ export const loader = async () => {
   return { pokemons };
 };
 
-const RemixTutorialLayout = ({ loaderData }: Route.ComponentProps) => {
+const PokemonsLayout = ({ loaderData }: Route.ComponentProps) => {
   const { pokemons } = loaderData;
   return (
     <>
       <SidebarProvider>
-        <RemixTutorialSidebar pokemons={pokemons} />
+        <PokemonsSidebar pokemons={pokemons} />
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
@@ -59,7 +59,7 @@ const RemixTutorialLayout = ({ loaderData }: Route.ComponentProps) => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Remix Tutorial</BreadcrumbPage>
+                  <BreadcrumbPage>Pokemon App</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -71,4 +71,4 @@ const RemixTutorialLayout = ({ loaderData }: Route.ComponentProps) => {
   );
 };
 
-export default RemixTutorialLayout;
+export default PokemonsLayout;

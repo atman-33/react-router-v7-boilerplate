@@ -1,22 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { BrowserRouter } from 'react-router';
 import { SidebarProvider } from '~/components/shadcn/ui/sidebar';
-import RemixTutorialSidebar from './remix-tutorial-sidebar';
+import { PokemonsSidebar } from './pokemons-sidebar';
 
-const meta: Meta<typeof RemixTutorialSidebar> = {
-  title: 'Components/RemixTutorialSidebar',
-  component: RemixTutorialSidebar,
+const meta: Meta<typeof PokemonsSidebar> = {
+  title: 'Components/PokemonSidebar',
+  component: PokemonsSidebar,
   decorators: [
     (Story) => (
-      <SidebarProvider>
-        <Story />
-      </SidebarProvider>
+      <BrowserRouter>
+        <SidebarProvider>
+          <Story />
+        </SidebarProvider>
+      </BrowserRouter>
     ),
   ],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof RemixTutorialSidebar>;
+type Story = StoryObj<typeof PokemonsSidebar>;
 
 export const Default: Story = {
   args: {
