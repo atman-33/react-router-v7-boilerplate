@@ -27,15 +27,19 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   onChange: handleInputChange,
   searching = false,
 }) => {
-  const handleCancelClick = () => {
+  const handleClearClick = () => {
     if (!id) {
       return;
     }
 
     const input = document.getElementById(id);
     if (input instanceof HTMLInputElement) {
-      input.value = '';
+      // NOTE: インプットの値が無ければ何もしない
+      if (input.value === '') {
+        return;
+      }
 
+      input.value = '';
       // Formのsubmitイベントを手動でトリガー
       const form = input.closest('form');
       if (form) {
@@ -71,7 +75,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       <button
         type="button"
         className="absolute inset-y-0 right-2"
-        onClick={handleCancelClick}
+        onClick={handleClearClick}
       >
         ❌
       </button>
