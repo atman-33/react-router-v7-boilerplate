@@ -1,7 +1,9 @@
-import { Form, Outlet } from 'react-router';
+import type React from 'react';
+import { Form, Outlet, useSubmit } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
 import { Button } from '~/components/shadcn/ui/button';
 import { Image } from '~/components/shared/image';
+import { AlertDialog } from '~/components/shared/react-call/alert-dialog';
 import type { Route } from './+types/route';
 import { Favorite } from './components/favorite';
 
@@ -19,6 +21,23 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 const ContactPage = ({ loaderData }: Route.ComponentProps) => {
   const { contact } = loaderData;
+  const submit = useSubmit();
+
+  const handleDeleteSubmit = async (event: React.FormEvent) => {
+    // フォームの送信をキャンセル
+    event.preventDefault();
+
+    const res = await AlertDialog.call({
+      message: 'Please confirm you want to delete this record.',
+    });
+
+    if (res === 'cancel') {
+      return;
+    }
+
+    const formData = event.currentTarget as HTMLFormElement;
+    submit(formData, { method: 'post', action: 'destroy' });
+  };
 
   if (!contact) {
     return <div>not found</div>;
@@ -71,14 +90,7 @@ const ContactPage = ({ loaderData }: Route.ComponentProps) => {
             <Form
               action="destroy"
               method="post"
-              onSubmit={(event) => {
-                const response = confirm(
-                  'Please confirm you want to delete this record.',
-                );
-                if (!response) {
-                  event.preventDefault();
-                }
-              }}
+              onSubmit={(event) => handleDeleteSubmit(event)}
             >
               <Button variant="destructive" type="submit">
                 Delete
