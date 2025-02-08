@@ -25,6 +25,7 @@ interface ConformInputProps<Schema> {
   };
   placeholder?: string | undefined;
   value?: string | number | readonly string[] | undefined;
+  defaultValue?: string | number | readonly string[] | undefined;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   className?: string | undefined;
 }
@@ -39,6 +40,7 @@ const ConformInput = <Schema,>({
   options,
   placeholder,
   value,
+  defaultValue,
   onChange: handleInputChange,
   className,
 }: ConformInputProps<Schema>) => {
@@ -51,6 +53,7 @@ const ConformInput = <Schema,>({
         placeholder={placeholder}
         className={`${className} ${!!metadata.errors && 'border-red-500'}`}
         value={value}
+        defaultValue={defaultValue}
         onChange={handleInputChange}
       />
       {metadata.errors && (
