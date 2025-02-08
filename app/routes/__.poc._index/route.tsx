@@ -16,7 +16,7 @@ const PocPage = () => {
         <Link to="/">
           <Button variant="secondary">Home</Button>
         </Link>
-
+        <LinkButton to="/poc/react-call" label="react-call" />
         <LinkButton to="/poc/sample/csr" label="Sample CSR" />
         <LinkButton to="/poc/sample/ssr" label="Sample SSR" />
         <LinkButton to="/poc/sample/ssg" label="Sample SSG" />
