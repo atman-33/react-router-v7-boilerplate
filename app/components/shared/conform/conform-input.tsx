@@ -1,33 +1,27 @@
 import { type FieldMetadata, getInputProps } from '@conform-to/react';
 import { Input } from '~/components/shadcn/ui/input';
 
-interface ConformInputProps<Schema> {
+type OptionType =
+  | 'number'
+  | 'search'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'month'
+  | 'password'
+  | 'range'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week';
+
+interface ConformInputProps<Schema>
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   metadata: FieldMetadata<Schema>;
-  options: {
-    type:
-      | 'number'
-      | 'search'
-      | 'color'
-      | 'date'
-      | 'datetime-local'
-      | 'email'
-      | 'file'
-      | 'hidden'
-      | 'month'
-      | 'password'
-      | 'range'
-      | 'tel'
-      | 'text'
-      | 'time'
-      | 'url'
-      | 'week';
-    value?: boolean | undefined;
-  };
-  placeholder?: string | undefined;
-  value?: string | number | readonly string[] | undefined;
-  defaultValue?: string | number | readonly string[] | undefined;
-  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  className?: string | undefined;
 }
 
 /**
@@ -37,24 +31,18 @@ interface ConformInputProps<Schema> {
  */
 const ConformInput = <Schema,>({
   metadata,
-  options,
-  placeholder,
-  value,
-  defaultValue,
-  onChange: handleInputChange,
   className,
+  ...props
 }: ConformInputProps<Schema>) => {
-  const inputProps = getInputProps(metadata, options);
+  const { type, ...restProps } = props;
+  const inputProps = getInputProps(metadata, { type: type as OptionType });
 
   return (
     <div className="flex flex-col">
       <Input
         {...inputProps}
-        placeholder={placeholder}
+        {...restProps}
         className={`${className} ${!!metadata.errors && 'border-red-500'}`}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={handleInputChange}
       />
       {metadata.errors && (
         <div>

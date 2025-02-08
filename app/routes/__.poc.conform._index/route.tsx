@@ -48,7 +48,7 @@ const PocConformPage = ({ actionData }: Route.ComponentProps) => {
         <Label htmlFor="name">Name</Label>
         <ConformInput
           metadata={name}
-          options={{ type: 'text' }}
+          type="text"
           placeholder="name..."
           defaultValue={'abc'}
         />
@@ -57,7 +57,7 @@ const PocConformPage = ({ actionData }: Route.ComponentProps) => {
         <Label htmlFor="email">Email</Label>
         <ConformInput
           metadata={email}
-          options={{ type: 'email' }}
+          type="email"
           placeholder="email..."
           defaultValue={'abc@test.com'}
         />
