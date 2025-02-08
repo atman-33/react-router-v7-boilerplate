@@ -10,7 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from '~/components/shadcn/ui/sidebar';
-import type { PokemonSummary } from '~/routes/__.poc._index/types/pokemon';
+import type { PokemonSummary } from '~/routes/__.poc_.pokemons/types/pokemon';
 
 interface PokemonsSidebarProps {
   pokemons: PokemonSummary[];

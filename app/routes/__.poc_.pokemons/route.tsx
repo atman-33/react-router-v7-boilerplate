@@ -12,9 +12,9 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '~/components/shadcn/ui/sidebar';
-import type { PokemonResourceList } from '../__.poc._index/types/pokemon';
 import type { Route } from './+types/route';
 import { PokemonsSidebar } from './components/pokemons-sidebar';
+import type { PokemonResourceList } from './types/pokemon';
 
 // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png
 

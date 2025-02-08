@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useFetcher } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import { Input } from '~/components/shadcn/ui/input';
-import type { NamedAPIResource } from '../__.poc._index/types/pokemon';
+import type { NamedAPIResource } from '../__.poc_.pokemons/types/pokemon';
 import type { Route } from './+types/route';
 
 const fetchPokes = async (keyword?: string) => {
