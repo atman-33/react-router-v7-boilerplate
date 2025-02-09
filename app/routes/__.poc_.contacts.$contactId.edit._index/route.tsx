@@ -10,6 +10,7 @@ import { Dialog } from '~/components/shadcn/ui/dialog';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
 import { ConformTextarea } from '~/components/shared/conform/conform-textarea';
+import { commitSession, getSession } from '~/sessions.server';
 import type { Route } from './+types/route';
 import {
   contactEditFormSchema,
@@ -44,7 +45,16 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
     data: { ...updates },
   });
 
-  return redirect(`/poc/contacts/${params.contactId}`);
+  // トーストに表示するメッセージを格納
+  const session = await getSession(request.headers.get('Cookie'));
+  session.flash('toast', {
+    type: 'success',
+    message: 'Contact successfully updated!',
+  });
+
+  return redirect(`/poc/contacts/${params.contactId}`, {
+    headers: { 'Set-Cookie': await commitSession(session) },
+  });
 };
 
 const ContactEditPage = ({ loaderData, actionData }: Route.ComponentProps) => {
