@@ -42,6 +42,8 @@ app
 +-- types             # アプリケーション全体で使用される基本タイプ
 |
 +-- utils             # 共有ユーティリティ関数
+|
++-- sessions.server.ts  # セッションストレージ
 ```
 
 ### app/components

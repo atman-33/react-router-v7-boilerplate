@@ -4,12 +4,19 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  data,
   isRouteErrorResponse,
 } from 'react-router';
 
+import { useEffect } from 'react';
 import type { Route } from './+types/root';
 import stylesheet from './app.css?url';
+import {
+  CustomToaster,
+  showToast,
+} from './components/shadcn/custom/custom-sonner';
 import { ReactCallRoots } from './components/shared/react-call';
+import { commitSession, getSession } from './sessions.server';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -24,6 +31,18 @@ export const links: Route.LinksFunction = () => [
   },
   { rel: 'stylesheet', href: stylesheet },
 ];
+
+export const loader = async ({ request }: Route.LoaderArgs) => {
+  const session = await getSession(request.headers.get('Cookie'));
+  return data(
+    { toast: session.get('toast') },
+    {
+      headers: {
+        'Set-Cookie': await commitSession(session),
+      },
+    },
+  );
+};
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -43,11 +62,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+export default function App({ loaderData }: Route.ComponentProps) {
+  const { toast } = loaderData;
+
+  useEffect(() => {
+    if (toast) {
+      showToast(toast.type, { description: toast.message }, toast.type);
+    }
+  }, [toast]);
+
   return (
     <>
       <Outlet />
       <ReactCallRoots />
+      <CustomToaster />
     </>
   );
 }

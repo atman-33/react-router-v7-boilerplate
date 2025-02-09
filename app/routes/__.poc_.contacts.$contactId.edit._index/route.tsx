@@ -3,12 +3,14 @@ import { parseWithZod } from '@conform-to/zod';
 import { useEffect } from 'react';
 import { redirect, useFetcher, useNavigate } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
+import { showToast } from '~/components/shadcn/custom/custom-sonner';
 import { DialogContentNoCloseButton } from '~/components/shadcn/custom/dialog-content-no-close-button';
 import { Button } from '~/components/shadcn/ui/button';
 import { Dialog } from '~/components/shadcn/ui/dialog';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
 import { ConformTextarea } from '~/components/shared/conform/conform-textarea';
+import { commitSession, getSession } from '~/sessions.server';
 import type { Route } from './+types/route';
 import {
   contactEditFormSchema,
@@ -43,20 +45,29 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
     data: { ...updates },
   });
 
-  return redirect(`/poc/contacts/${params.contactId}`);
+  // トーストに表示するメッセージを格納
+  const session = await getSession(request.headers.get('Cookie'));
+  session.flash('toast', {
+    type: 'success',
+    message: 'Contact successfully updated!',
+  });
+
+  return redirect(`/poc/contacts/${params.contactId}`, {
+    headers: { 'Set-Cookie': await commitSession(session) },
+  });
 };
 
-const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
+const ContactEditPage = ({ loaderData, actionData }: Route.ComponentProps) => {
   const { contact } = loaderData;
   const [form, { first, last, twitter, avatar, notes }] = useContactEditForm();
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<typeof actionData>();
   // NOTE: useNavigateはブラウザ履歴で戻る操作をするために利用
   const navigate = useNavigate();
 
   useEffect(() => {
     // NOTE: fetcher.Formを利用しているため、actionDataがfetcher.dataが格納される
-    if (fetcher.data) {
-      window.confirm(fetcher.data?.message);
+    if (fetcher.data && !fetcher.data.success) {
+      showToast('Error', { description: fetcher.data.message }, 'error');
     }
   }, [fetcher.data]);
 
