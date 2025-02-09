@@ -19,6 +19,7 @@ const PocPage = () => {
         <LinkButton to="/poc/sample-ssg" label="Sample SSG" />
         <LinkButton to="/poc/sample-ssr-csr" label="Sample SSR & CSR" />
         <Separator />
+        <LinkButton to="/poc/conform" label="conform" />
         <LinkButton to="/poc/react-call" label="react-call" />
         <Separator />
         <LinkButton to="/poc/pokemons" label="Pokemon App" />
