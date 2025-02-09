@@ -36,48 +36,45 @@ const CustomToaster = ({ ...props }: CustomToasterProps) => {
   );
 };
 
-const toastInfo = (
+type ToastType = 'info' | 'success' | 'warning' | 'error';
+
+const showToast = (
   message: React.ReactNode | (() => React.ReactNode),
   data?: ExternalToast,
+  type: ToastType = 'info',
 ) => {
-  toast.info(message, {
-    duration: data?.duration ?? 2000,
-    position: data?.position ?? 'bottom-center',
-    ...data,
-  });
+  switch (type) {
+    case 'info':
+      toast.info(message, {
+        duration: data?.duration ?? 2000,
+        position: data?.position ?? 'bottom-center',
+        ...data,
+      });
+      break;
+    case 'success':
+      toast.success(message, {
+        duration: data?.duration ?? 2000,
+        position: data?.position ?? 'bottom-center',
+        ...data,
+      });
+      break;
+    case 'warning':
+      toast.warning(message, {
+        duration: data?.duration ?? 2000,
+        position: data?.position ?? 'bottom-center',
+        ...data,
+      });
+      break;
+    case 'error':
+      toast.error(message, {
+        duration: data?.duration ?? 2000,
+        position: data?.position ?? 'bottom-center',
+        ...data,
+      });
+      break;
+    default:
+      throw new Error(`Unknown toast type: ${type}`);
+  }
 };
 
-const toastSuccess = (
-  message: React.ReactNode | (() => React.ReactNode),
-  data?: ExternalToast,
-) => {
-  toast.success(message, {
-    duration: data?.duration ?? 2000,
-    position: data?.position ?? 'bottom-center',
-    ...data,
-  });
-};
-
-const toastWarning = (
-  message: React.ReactNode | (() => React.ReactNode),
-  data?: ExternalToast,
-) => {
-  toast.warning(message, {
-    duration: data?.duration ?? 2000,
-    position: data?.position ?? 'bottom-center',
-    ...data,
-  });
-};
-
-const toastError = (
-  message: React.ReactNode | (() => React.ReactNode),
-  data?: ExternalToast,
-) => {
-  toast.error(message, {
-    duration: data?.duration ?? 2000,
-    position: data?.position ?? 'bottom-center',
-    ...data,
-  });
-};
-
-export { CustomToaster, toastError, toastInfo, toastSuccess, toastWarning };
+export { CustomToaster, showToast, type ToastType };
