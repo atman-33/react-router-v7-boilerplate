@@ -1,4 +1,10 @@
 import { toast } from 'sonner';
+import {
+  toastError,
+  toastInfo,
+  toastSuccess,
+  toastWarning,
+} from '~/components/shadcn/custom/custom-sonner';
 import { Button } from '~/components/shadcn/ui/button';
 
 const PocToastPage = () => {
@@ -17,6 +23,66 @@ const PocToastPage = () => {
         }
       >
         Show Toast
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toastInfo('Information', {
+            description: 'This is an informational message',
+            action: {
+              label: 'Got it',
+              onClick: () => console.log('Got it'),
+            },
+            cancel: {
+              label: 'Cancel',
+              onClick: () => console.log('Cancel'),
+            },
+          })
+        }
+      >
+        Info
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toastSuccess('Event created successfully', {
+            description: 'Your event has been created',
+            action: {
+              label: 'View',
+              onClick: () => console.log('View'),
+            },
+          })
+        }
+      >
+        Success
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toastWarning('Warning', {
+            description: 'This action is irreversible',
+            action: {
+              label: 'Proceed',
+              onClick: () => console.log('Proceed'),
+            },
+          })
+        }
+      >
+        Warning
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toastError('An error occurred', {
+            description: 'Unable to create event',
+            action: {
+              label: 'Retry',
+              onClick: () => console.log('Retry'),
+            },
+          })
+        }
+      >
+        Error
       </Button>
     </div>
   );

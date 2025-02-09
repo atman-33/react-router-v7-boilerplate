@@ -9,7 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import stylesheet from './app.css?url';
-import { Toaster } from './components/shadcn/ui/sonner';
+import { CustomToaster } from './components/shadcn/custom/custom-sonner';
 import { ReactCallRoots } from './components/shared/react-call';
 
 export const links: Route.LinksFunction = () => [
@@ -49,7 +49,7 @@ export default function App() {
     <>
       <Outlet />
       <ReactCallRoots />
-      <Toaster />
+      <CustomToaster />
     </>
   );
 }
