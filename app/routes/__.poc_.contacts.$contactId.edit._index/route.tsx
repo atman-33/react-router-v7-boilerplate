@@ -3,6 +3,7 @@ import { parseWithZod } from '@conform-to/zod';
 import { useEffect } from 'react';
 import { redirect, useFetcher, useNavigate } from 'react-router';
 import { prisma } from '~/.server/lib/prisma-client';
+import { toastError } from '~/components/shadcn/custom/custom-sonner';
 import { DialogContentNoCloseButton } from '~/components/shadcn/custom/dialog-content-no-close-button';
 import { Button } from '~/components/shadcn/ui/button';
 import { Dialog } from '~/components/shadcn/ui/dialog';
@@ -46,17 +47,17 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
   return redirect(`/poc/contacts/${params.contactId}`);
 };
 
-const ContactEditPage = ({ loaderData }: Route.ComponentProps) => {
+const ContactEditPage = ({ loaderData, actionData }: Route.ComponentProps) => {
   const { contact } = loaderData;
   const [form, { first, last, twitter, avatar, notes }] = useContactEditForm();
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<typeof actionData>();
   // NOTE: useNavigateはブラウザ履歴で戻る操作をするために利用
   const navigate = useNavigate();
 
   useEffect(() => {
     // NOTE: fetcher.Formを利用しているため、actionDataがfetcher.dataが格納される
-    if (fetcher.data) {
-      window.confirm(fetcher.data?.message);
+    if (fetcher.data && !fetcher.data.success) {
+      toastError('Error', { description: fetcher.data.message });
     }
   }, [fetcher.data]);
 
