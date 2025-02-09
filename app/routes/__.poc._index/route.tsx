@@ -21,6 +21,7 @@ const PocPage = () => {
         <Separator />
         <LinkButton to="/poc/conform" label="conform" />
         <LinkButton to="/poc/react-call" label="react-call" />
+        <LinkButton to="/poc/sonner" label="sonner" />
         <Separator />
         <LinkButton to="/poc/pokemons" label="Pokemon App" />
         <LinkButton to="/poc/contacts" label="Remix Tutorial" />
