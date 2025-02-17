@@ -6,7 +6,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["**/node_modules/**"]
+    "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
+    "ignore": ["**/.react-router", "**/.vscode", "**/node_modules"]
   },
   "formatter": {
     "indentStyle": "space",
@@ -16,7 +17,9 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "nursery": { "useSortedClasses": "warn" },
+      "nursery": {
+        "useSortedClasses": "warn"
+      },
       "correctness": {
         "noUnusedImports": "warn",
         "noUnusedVariables": "warn"
@@ -37,7 +40,9 @@
       "include": ["app/components/shadcn/ui/**"],
       "linter": {
         "rules": {
-          "nursery": { "useSortedClasses": "off" }
+          "nursery": {
+            "useSortedClasses": "off"
+          }
         }
       }
     }
