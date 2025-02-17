@@ -28,7 +28,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
       });
 
       // 編集ページにリダイレクト
-      return redirect(`/poc/contacts/${res.id}/edit`, {
+      return redirect(`/demo/contacts/${res.id}/edit`, {
         headers: { 'Set-Cookie': await commitSession(session) },
       });
     }

@@ -52,7 +52,7 @@ export const action = async ({ params, request }: Route.ActionArgs) => {
     message: 'Contact successfully updated!',
   });
 
-  return redirect(`/poc/contacts/${params.contactId}`, {
+  return redirect(`/demo/contacts/${params.contactId}`, {
     headers: { 'Set-Cookie': await commitSession(session) },
   });
 };

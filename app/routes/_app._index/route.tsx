@@ -17,8 +17,8 @@ export default function AppPage() {
       <Welcome />
       <div className="flex justify-center">
         <div className="flex flex-col gap-4">
-          <Link to="/poc" className="flex justify-center">
-            <Button className="px-8">PoC</Button>
+          <Link to="/demo" className="flex justify-center">
+            <Button className="px-8">Demo</Button>
           </Link>
         </div>
       </div>

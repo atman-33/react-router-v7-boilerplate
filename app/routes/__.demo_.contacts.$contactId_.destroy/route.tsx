@@ -12,7 +12,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     message: 'Contact successfully deleted!',
   });
 
-  return redirect('/poc/contacts', {
+  return redirect('/demo/contacts', {
     headers: { 'Set-Cookie': await commitSession(session) },
   });
 };
