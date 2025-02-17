@@ -39,10 +39,10 @@ const ContactsSidebar = ({
 
   return (
     <Sidebar>
-      <SidebarHeader className="border-b">
-        <Link to="/poc/contacts">
-          <div className="flex items-center gap-2">
-            <span className="font-bold">Remix Tutorial</span>
+      <SidebarHeader className="h-10 border-b">
+        <Link to="/demo/contacts">
+          <div className="flexitems-center gap-2">
+            <span className="font-bold">Address Book</span>
           </div>
         </Link>
       </SidebarHeader>
@@ -88,7 +88,7 @@ const ContactsSidebar = ({
               {contacts.map((contact) => (
                 <SidebarMenuItem key={contact.id} className="">
                   <NavLink
-                    to={`/poc/contacts/${contact.id}`}
+                    to={`./${contact.id}`}
                     className={({ isActive, isPending }) =>
                       `flex items-center ${
                         isActive
@@ -133,7 +133,7 @@ const ContactsSidebar = ({
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t py-4 font-bold">
-        Remix Contacts
+        <Link to="/about">React Router Contacts</Link>
       </SidebarFooter>
     </Sidebar>
   );

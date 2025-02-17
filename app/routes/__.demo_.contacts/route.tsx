@@ -75,8 +75,8 @@ const ContactsLayout = ({ loaderData }: Route.ComponentProps) => {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <Link to="/poc">
-                  <BreadcrumbLink>PoC</BreadcrumbLink>
+                <Link to="/demo">
+                  <BreadcrumbLink>Demo</BreadcrumbLink>
                 </Link>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

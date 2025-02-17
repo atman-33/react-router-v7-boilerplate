@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '~/components/shadcn/ui/button';
 import { AlertDialog } from '~/components/shared/react-call/alert-dialog';
 
-const PocReactCallPage = () => {
+const DemoReactCallPage = () => {
   const [response, setResponse] = useState<string>();
 
   const handleButtonClick = async () => {
@@ -29,4 +29,4 @@ const PocReactCallPage = () => {
   );
 };
 
-export default PocReactCallPage;
+export default DemoReactCallPage;

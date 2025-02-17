@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 import { showToast } from '~/components/shadcn/custom/custom-sonner';
 import { Button } from '~/components/shadcn/ui/button';
 
-const PocToastPage = () => {
+const DemoToastPage = () => {
   return (
     <div className="flex flex-col gap-4">
       <Button
@@ -99,4 +99,4 @@ const PocToastPage = () => {
   );
 };
 
-export default PocToastPage;
+export default DemoToastPage;

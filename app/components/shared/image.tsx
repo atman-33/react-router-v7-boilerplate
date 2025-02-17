@@ -1,26 +1,21 @@
 import defaultImage from '/not-found.svg';
 
-interface ImageProps {
-  src: string;
-  alt?: string;
-  className?: string;
-}
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 
 /**
  * 画像コンポーネント。画像読み込みエラー時はデフォルト画像を表示する。
- * @param param0
- * @returns
  */
-const Image = ({ src, alt, className }: ImageProps) => {
+const Image = ({ src, alt, ...props }: ImageProps) => {
   return (
+    // biome-ignore lint/a11y/useAltText: <explanation>
     <img
       src={src || defaultImage}
       alt={alt}
-      className={className}
       onError={(e) => {
-        const target = e.target as HTMLImageElement;
+        const target = e.currentTarget as HTMLImageElement;
         target.src = defaultImage;
       }}
+      {...props}
     />
   );
 };

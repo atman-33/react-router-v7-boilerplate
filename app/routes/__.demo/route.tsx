@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router';
 import { Button } from '~/components/shadcn/ui/button';
 import { Separator } from '~/components/shadcn/ui/separator';
 
-const PocLayout = () => {
+const DemoLayout = () => {
   return (
     <>
       <div className="my-4 mr-4 flex justify-center gap-4">
@@ -11,9 +11,9 @@ const PocLayout = () => {
             Home
           </Button>
         </Link>
-        <Link to="/poc">
+        <Link to="/demo">
           <Button variant="secondary" className="w-20">
-            PoC
+            Demo
           </Button>
         </Link>
       </div>
@@ -25,4 +25,4 @@ const PocLayout = () => {
   );
 };
 
-export default PocLayout;
+export default DemoLayout;
