@@ -1,12 +1,16 @@
+import type { User } from '@prisma/client';
 import { createCookieSessionStorage } from 'react-router';
 import type { ToastType } from './components/shadcn/custom/custom-sonner';
 import { env } from './config/env';
 
-type SessionData = {
-  // NOTE: auth実装に合わせて変更する
-  userId: string;
-};
+/**
+ * セッションデータ。認証で利用する。
+ */
+type SessionData = User;
 
+/**
+ * セッションフラッシュメッセージ。トースト表示で利用する。
+ */
 type SessionFlashData = {
   toast: {
     type: ToastType;
