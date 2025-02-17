@@ -14,17 +14,11 @@ const PocPage = () => {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col items-center gap-4 p-4">
-        <LinkButton to="/poc/sample-csr" label="Sample CSR" />
-        <LinkButton to="/poc/sample-ssr" label="Sample SSR" />
-        <LinkButton to="/poc/sample-ssg" label="Sample SSG" />
-        <LinkButton to="/poc/sample-ssr-csr" label="Sample SSR & CSR" />
+        <LinkButton to="/poc/contacts" label="Remix Tutorial" />
         <Separator />
         <LinkButton to="/poc/conform" label="conform" />
         <LinkButton to="/poc/react-call" label="react-call" />
         <LinkButton to="/poc/sonner" label="sonner" />
-        <Separator />
-        <LinkButton to="/poc/pokemons" label="Pokemon App" />
-        <LinkButton to="/poc/contacts" label="Remix Tutorial" />
       </div>
     </div>
   );
