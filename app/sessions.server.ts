@@ -6,7 +6,9 @@ import { env } from './config/env';
 /**
  * セッションデータ。認証で利用する。
  */
-type SessionData = User;
+type SessionData = {
+  user: Omit<User, 'password'>;
+};
 
 /**
  * セッションフラッシュメッセージ。トースト表示で利用する。
