@@ -10,7 +10,7 @@ import { Button } from '~/components/shadcn/ui/button';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
 import { getSession } from '~/sessions.server';
-import { authenticator } from '../auth/services/auth.server';
+import { authenticator } from '../__.demo.auth/services/auth.server';
 import type { Route } from './+types/route';
 import { useLoginForm } from './hooks/use-login-form';
 
@@ -99,7 +99,7 @@ const LoginPage = ({ actionData }: Route.ComponentProps) => {
       </div>
       <p className="text-gray-600">
         {`Don't have an account? `}
-        <Link to="/auth/signup">
+        <Link to="/demo/auth/signup">
           <span className="px-2 text-primary hover:underline">Sign Up</span>
         </Link>
       </p>
