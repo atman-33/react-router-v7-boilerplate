@@ -9,7 +9,7 @@ import {
 import { Button } from '~/components/shadcn/ui/button';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
-import { getSession } from '~/sessions.server';
+import { commitSession, getSession } from '~/sessions.server';
 import { authenticator } from '../__.demo.auth/services/auth.server';
 import type { Route } from './+types/route';
 import { useLoginForm } from './hooks/use-login-form';
@@ -28,7 +28,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
         const session = await getSession(request.headers.get('cookie'));
         session.set('user', user);
         if (user) {
-          return redirect('/');
+          return redirect('/demo/auth/login', {
+            headers: { 'Set-Cookie': await commitSession(session) },
+          });
         }
         break;
       }
