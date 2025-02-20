@@ -44,18 +44,13 @@ export const action = async ({ request }: Route.ActionArgs) => {
         throw new Error('Unknown action');
     }
   } catch (e) {
-    // TODO: この記述がないと成功時にリダイレクトできないのか要確認
-    if (e instanceof Response) {
-      return e;
-    }
-
     // 認証失敗時にthrowしたエラー
     if (e instanceof Error) {
       return { message: e.message, status: 401 };
     }
 
     // その他のエラー
-    return { message: 'unknown error', status: 401 };
+    return { message: 'Unknown error', status: 401 };
   }
 };
 
