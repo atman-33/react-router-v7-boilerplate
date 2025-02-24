@@ -1,3 +1,27 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2021 Sergio Xalambrí
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import type { OAuth2Tokens } from 'arctic';
 import { OAuth2Strategy } from 'remix-auth-oauth2';
 
@@ -7,85 +31,46 @@ import { OAuth2Strategy } from 'remix-auth-oauth2';
 export type GoogleScope = string;
 
 export type GoogleStrategyOptions = {
-  /** Google API クライアントID */
   clientId: string;
-  /** Google API クライアントシークレット */
   clientSecret: string;
-  /** 認証後のリダイレクト先 */
   redirectURI: string;
   /**
-   * OAuthスコープ（アクセス許可範囲）
-   * @default ["openid", "profile", "email"]
+   * @default "openid profile email"
    */
   scopes?: GoogleScope[];
-  /**
-   * オフラインならリフレッシュトークンを取得
-   * - 'online': リフレッシュトークンを取得しない
-   * - 'offline': リフレッシュトークンを取得
-   */
   accessType?: 'online' | 'offline';
-  /** 追加スコープを許可するかどうか */
   includeGrantedScopes?: boolean;
-  /**
-   * 認証画面の挙動
-   * - 'none': ユーザーへの確認を行わない
-   * - 'consent': 同意画面を表示
-   * - 'select_account': アカウント選択画面を表示
-   */
   prompt?: 'none' | 'consent' | 'select_account';
-  /** ホストドメイン制限（Google Workspace向け） */
   hd?: string;
-  /** ユーザー名のヒント（事前入力用） */
   loginHint?: string;
 };
 
 export type GoogleProfile = {
-  /** ユーザーの一意ID */
   id: string;
-  /** ユーザーの表示名 */
   displayName: string;
-  /** 名前情報 */
   name: {
-    /** 姓 */
     familyName: string;
-    /** 名 */
     givenName: string;
   };
-  /** メールアドレス */
   emails: [{ value: string }];
-  /** プロフィール画像 */
   photos: [{ value: string }];
-  /** APIの生データ */
   _json: {
-    /** ユーザーID（Google固有の一意識別子） */
     sub: string;
-    /** フルネーム */
     name: string;
-    /** 名 */
     given_name: string;
-    /** 姓 */
     family_name: string;
-    /** プロフィール画像URL */
     picture: string;
-    /** ユーザーのロケール情報（例: ja, en） */
     locale: string;
-    /** メールアドレス */
     email: string;
-    /** メールアドレスの確認ステータス */
     email_verified: boolean;
-    /** ユーザーの所属するドメイン（Google Workspace用） */
     hd: string;
   };
 };
 
 export type GoogleExtraParams = {
-  /** アクセストークンの有効期限（秒） */
-  expires_in: number;
-  /** トークンの種類 */
+  expires_in: 3920;
   token_type: 'Bearer';
-  /** 取得したスコープ（スペース区切りの文字列） */
   scope: string;
-  /** IDトークン（JWT形式） */
   id_token: string;
 } & Record<string, string | number>;
 
@@ -95,22 +80,15 @@ export const GoogleStrategyDefaultScopes = [
   'https://www.googleapis.com/auth/userinfo.email',
 ];
 export const GoogleStrategyDefaultName = 'google';
+const userInfoURL = 'https://www.googleapis.com/oauth2/v3/userinfo';
 
 export class GoogleStrategy<User> extends OAuth2Strategy<User> {
   public name = GoogleStrategyDefaultName;
-
   private readonly accessType: string;
-
   private readonly prompt?: 'none' | 'consent' | 'select_account';
-
   private readonly includeGrantedScopes: boolean;
-
   private readonly hd?: string;
-
   private readonly loginHint?: string;
-
-  private readonly userInfoURL =
-    'https://www.googleapis.com/oauth2/v3/userinfo';
 
   constructor(
     {
@@ -162,8 +140,8 @@ export class GoogleStrategy<User> extends OAuth2Strategy<User> {
     return params;
   }
 
-  protected async userProfile(tokens: OAuth2Tokens): Promise<GoogleProfile> {
-    const response = await fetch(this.userInfoURL, {
+  static async userProfile(tokens: OAuth2Tokens): Promise<GoogleProfile> {
+    const response = await fetch(userInfoURL, {
       headers: {
         Authorization: `Bearer ${tokens.accessToken()}`,
       },

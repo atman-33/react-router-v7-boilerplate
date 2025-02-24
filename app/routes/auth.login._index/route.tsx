@@ -12,6 +12,7 @@ import { ConformInput } from '~/components/shared/conform/conform-input';
 import { commitSession, getSession } from '~/sessions.server';
 import { authenticator } from '../auth/services/auth.server';
 import type { Route } from './+types/route';
+import { GoogleForm } from './components/google-form';
 import { useLoginForm } from './hooks/use-login-form';
 
 export const action = async ({ request }: Route.ActionArgs) => {
@@ -33,14 +34,18 @@ export const action = async ({ request }: Route.ActionArgs) => {
       }
 
       case 'Sign In Google': {
-        // TODO: Google認証の実装
-        throw new Error('Not implemented');
+        return await authenticator.authenticate('google', request);
       }
 
       default:
         throw new Error('Unknown action');
     }
   } catch (e) {
+    // NOTE: この記述がないとGoogle認証成功時にリダイレクトできない
+    if (e instanceof Response) {
+      return e;
+    }
+
     // 認証失敗時にthrowしたエラー
     if (e instanceof Error) {
       return { message: e.message, status: 401 };
@@ -52,7 +57,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 };
 
 const LoginPage = ({ actionData }: Route.ComponentProps) => {
-  const data = actionData;
+  const data = actionData as { message?: string };
   const [form, { email, password }] = useLoginForm();
 
   return (
@@ -89,7 +94,7 @@ const LoginPage = ({ actionData }: Route.ComponentProps) => {
             )}
           </div>
         </Form>
-        {/* <GoogleForm /> */}
+        <GoogleForm />
       </div>
       <p className="text-gray-600">
         {`Don't have an account? `}
