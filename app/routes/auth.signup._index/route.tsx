@@ -10,6 +10,7 @@ import { Button } from '~/components/shadcn/ui/button';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
 import { commitSession, getSession } from '~/sessions.server';
+import { GoogleForm } from '../auth.login._index/components/google-form';
 import { authenticator } from '../auth/services/auth.server';
 import { createUser } from '../auth/services/signup.server';
 import type { Route } from './+types/route';
@@ -58,14 +59,18 @@ export const action = async ({ request }: Route.ActionArgs) => {
       }
 
       case 'Sign In Google': {
-        // TODO: Google認証の実装
-        throw new Error('Not implemented');
+        return await authenticator.authenticate('google', request);
       }
 
       default:
         throw new Error('Unknown action');
     }
   } catch (e) {
+    // NOTE: この記述がないとGoogle認証成功時にリダイレクトできない
+    if (e instanceof Response) {
+      return e;
+    }
+
     // 認証失敗時にthrowしたエラー
     if (e instanceof Error) {
       return { message: e.message, status: 401 };
@@ -119,7 +124,7 @@ const SignUpPage = ({ actionData }: Route.ComponentProps) => {
             )}
           </div>
         </Form>
-        {/* <GoogleForm /> */}
+        <GoogleForm />
       </div>
       <p className="text-gray-600">
         {'Already have an account? '}
