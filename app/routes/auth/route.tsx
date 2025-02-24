@@ -24,6 +24,13 @@ const AuthLayout = ({ loaderData }: Route.ComponentProps) => {
     <>
       <div className="flex items-center justify-center gap-4 p-4">
         <h1>{`Hello ${user?.name} さん`}</h1>
+        {user?.image && (
+          <img
+            src={user.image}
+            alt={user.name}
+            className="h-10 w-10 rounded-full"
+          />
+        )}
         <Form method="post">
           <Button type="submit" name="action" value="logout">
             Logout
