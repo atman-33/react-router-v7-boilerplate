@@ -14,8 +14,8 @@ const DemoPage = () => {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col items-center gap-4 p-4">
+        <LinkButton to="/auth/login" label="Authentication" />
         <LinkButton to="/demo/contacts" label="React Router Tutorial" />
-        <LinkButton to="/demo/auth/login" label="Authentication" />
         <Separator />
         <LinkButton to="/demo/conform" label="conform" />
         <LinkButton to="/demo/react-call" label="react-call" />

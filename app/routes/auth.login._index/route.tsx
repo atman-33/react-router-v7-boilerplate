@@ -10,7 +10,7 @@ import { Button } from '~/components/shadcn/ui/button';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
 import { commitSession, getSession } from '~/sessions.server';
-import { authenticator } from '../__.demo.auth/services/auth.server';
+import { authenticator } from '../auth/services/auth.server';
 import type { Route } from './+types/route';
 import { useLoginForm } from './hooks/use-login-form';
 
@@ -28,7 +28,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
         const session = await getSession(request.headers.get('cookie'));
         session.set('user', user);
         if (user) {
-          return redirect('/demo/auth/login', {
+          return redirect('/auth/login', {
             headers: { 'Set-Cookie': await commitSession(session) },
           });
         }
@@ -96,7 +96,7 @@ const LoginPage = ({ actionData }: Route.ComponentProps) => {
       </div>
       <p className="text-gray-600">
         {`Don't have an account? `}
-        <Link to="/demo/auth/signup">
+        <Link to="/auth/signup">
           <span className="px-2 text-primary hover:underline">Sign Up</span>
         </Link>
       </p>

@@ -13,7 +13,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 export const action = async ({ request }: Route.ActionArgs) => {
   // セッションを破棄してログアウト
   const session = await getSession(request.headers.get('Cookie'));
-  return redirect('/demo/auth/login', {
+  return redirect('/auth/login', {
     headers: { 'Set-Cookie': await destroySession(session) },
   });
 };

@@ -10,8 +10,8 @@ import { Button } from '~/components/shadcn/ui/button';
 import { Label } from '~/components/shadcn/ui/label';
 import { ConformInput } from '~/components/shared/conform/conform-input';
 import { commitSession, getSession } from '~/sessions.server';
-import { authenticator } from '../__.demo.auth/services/auth.server';
-import { createUser } from '../__.demo.auth/services/signup.server';
+import { authenticator } from '../auth/services/auth.server';
+import { createUser } from '../auth/services/signup.server';
 import type { Route } from './+types/route';
 import { useSignUpForm } from './hooks/use-signup-form';
 
@@ -49,7 +49,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
       const session = await getSession(request.headers.get('cookie'));
       session.set('user', user);
       if (user) {
-        return redirect('/demo/auth/login', {
+        return redirect('/auth/login', {
           headers: { 'Set-Cookie': await commitSession(session) },
         });
       }
@@ -113,7 +113,7 @@ const SignUpPage = ({ actionData }: Route.ComponentProps) => {
       </div>
       <p className="text-gray-600">
         {'Already have an account? '}
-        <Link to="/demo/auth/login">
+        <Link to="/auth/login">
           <span className="px-2 text-primary hover:underline">Sign In</span>
         </Link>
       </p>
