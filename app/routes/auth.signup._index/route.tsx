@@ -19,50 +19,60 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const formData = await request.clone().formData();
   const action = String(formData.get('_action'));
 
-  switch (action) {
-    case 'Sign Up': {
-      const name = String(formData.get('name'));
-      const email = String(formData.get('email'));
-      const password = String(formData.get('password'));
-      const errors: { [key: string]: string } = {};
+  try {
+    switch (action) {
+      case 'Sign Up': {
+        const name = String(formData.get('name'));
+        const email = String(formData.get('email'));
+        const password = String(formData.get('password'));
+        const errors: { [key: string]: string } = {};
 
-      if (
-        typeof action !== 'string' ||
-        typeof name !== 'string' ||
-        typeof email !== 'string' ||
-        typeof password !== 'string'
-      ) {
-        return { error: 'Invalid Form Data', form: action, status: 400 };
+        if (
+          typeof action !== 'string' ||
+          typeof name !== 'string' ||
+          typeof email !== 'string' ||
+          typeof password !== 'string'
+        ) {
+          return { error: 'Invalid Form Data', form: action, status: 400 };
+        }
+
+        const result = await createUser({ name, email, password });
+
+        if (result.error) {
+          errors.email = result.error.message;
+        }
+
+        if (Object.keys(errors).length > 0) {
+          return { errors };
+        }
+
+        const user = await authenticator.authenticate('user-pass', request);
+        const session = await getSession(request.headers.get('cookie'));
+        session.set('user', user);
+        if (user) {
+          return redirect('/auth/login', {
+            headers: { 'Set-Cookie': await commitSession(session) },
+          });
+        }
+        break;
       }
 
-      const result = await createUser({ name, email, password });
-
-      if (result.error) {
-        errors.email = result.error.message;
+      case 'Sign In Google': {
+        // TODO: Google認証の実装
+        throw new Error('Not implemented');
       }
 
-      if (Object.keys(errors).length > 0) {
-        return { errors };
-      }
-
-      const user = await authenticator.authenticate('user-pass', request);
-      const session = await getSession(request.headers.get('cookie'));
-      session.set('user', user);
-      if (user) {
-        return redirect('/auth/login', {
-          headers: { 'Set-Cookie': await commitSession(session) },
-        });
-      }
-      break;
+      default:
+        throw new Error('Unknown action');
+    }
+  } catch (e) {
+    // 認証失敗時にthrowしたエラー
+    if (e instanceof Error) {
+      return { message: e.message, status: 401 };
     }
 
-    case 'Sign In Google': {
-      // TODO: Google認証の実装
-      throw new Error('Not implemented');
-    }
-
-    default:
-      throw new Error('Unknown action');
+    // その他のエラー
+    return { message: 'Unknown error', status: 401 };
   }
 };
 

@@ -27,12 +27,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
         const user = await authenticator.authenticate('user-pass', request);
         const session = await getSession(request.headers.get('cookie'));
         session.set('user', user);
-        if (user) {
-          return redirect('/auth/login', {
-            headers: { 'Set-Cookie': await commitSession(session) },
-          });
-        }
-        break;
+        return redirect('/auth/login', {
+          headers: { 'Set-Cookie': await commitSession(session) },
+        });
       }
 
       case 'Sign In Google': {
