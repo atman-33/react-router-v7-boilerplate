@@ -14,6 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// --- React Router TutorialのAddress Book用モデル定義開始 ---
 model Contact {
   id       String  @id @default(uuid())
   first    String
@@ -24,17 +25,9 @@ model Contact {
   favorite Boolean @default(false)
 }
 
-model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  name      String
-  image     String?
-  provider  String   @default("Credentials")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+// --- React Router TutorialのAddress Book用モデル定義終了 ---
 
+// --- GraphQLサーバー実装のサンプル用モデル定義開始 ---
 model Planet {
   id        String              @id @default(uuid())
   name      String
@@ -59,4 +52,17 @@ model PlanetStarCluster {
   assignedAt    DateTime    @default(now()) // リレーションが作成された日時
 
   @@id([planetId, starClusterId]) // 複合主キー
+}
+
+// --- GraphQLサーバー実装のサンプル用モデル定義終了 ---
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  image     String?
+  provider  String   @default("Credentials")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
