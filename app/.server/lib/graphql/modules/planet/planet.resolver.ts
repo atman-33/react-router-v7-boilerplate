@@ -111,7 +111,7 @@ export const definePlanetResolver = () => {
       type: 'Planet',
       nullable: true,
       args: { input: t.arg({ type: DeletePlanetInput, required: true }) },
-      resolve: async (query, _, { input }) => {
+      resolve: async (query, _parent, { input }) => {
         const { id: rawId } = decodeGlobalID(input.id);
         return await prisma.planet.delete({
           ...query,
