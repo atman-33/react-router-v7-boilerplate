@@ -15,6 +15,8 @@
     "db:generate": "npx env-cmd -f .env npx prisma generate",
     "db:studio": "npx env-cmd -f .env npx prisma studio",
     "db:seed": "npx tsx prisma/seed.ts",
+    "--- GRAPHQL SECTION ---": "--- --- --- --- ---",
+    "graphql:schema": "npx tsx ./tools/graphql-codegen/export-schema.ts",
     "--- TEST SECTION ---": "--- --- --- --- ---",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
