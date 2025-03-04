@@ -7,7 +7,12 @@
   },
   "files": {
     "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
-    "ignore": ["**/.react-router", "**/.vscode", "**/node_modules"]
+    "ignore": [
+      "**/.react-router",
+      "**/.vscode",
+      "**/node_modules",
+      "app/.server/lib/graphql/@generated/**"
+    ]
   },
   "formatter": {
     "indentStyle": "space",
