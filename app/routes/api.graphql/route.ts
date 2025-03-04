@@ -1,27 +1,19 @@
-import { createSchema, createYoga } from 'graphql-yoga';
+import { createYoga } from 'graphql-yoga';
+import { schema } from '~/.server/lib/graphql/schema';
+import { getSession } from '~/sessions.server';
 import type { Route } from './+types/route';
 
-// Define your schema and resolvers
-const typeDefs = /* GraphQL */ `
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => 'Hello from Yoga!',
-  },
-};
-
-const schema = createSchema({
-  typeDefs,
-  resolvers,
-});
-
+// NOTE: createYogaで生成したインスタンスはシングルトンとして利用される。
 const yoga = createYoga({
   schema,
   graphqlEndpoint: '/api/graphql', // GraphQL のエンドポイントを指定
+  context: async (ctx) => {
+    // ログイン中のユーザー取得
+    const session = await getSession(ctx.request.headers.get('Cookie'));
+    const user = session.get('user');
+    // console.log(user);
+    return { ...ctx, user };
+  },
 });
 
 export const loader = async ({ request, context }: Route.LoaderArgs) => {
