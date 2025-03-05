@@ -1,4 +1,6 @@
 /* eslint-disable */
+/* eslint-disable */
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -197,3 +199,11 @@ export type UpdateStarClusterInput = {
   id: Scalars['String']['input'];
   name: Scalars['String']['input'];
 };
+
+export type GetPlanetsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPlanetsQuery = { __typename?: 'Query', planets?: { __typename?: 'QueryPlanetsConnection', totalCount: number, edges?: Array<{ __typename?: 'QueryPlanetsConnectionEdge', node?: { __typename?: 'Planet', id: string, name?: string | null } | null } | null> | null } | null };
+
+
+export const GetPlanetsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPlanets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"planets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<GetPlanetsQuery, GetPlanetsQueryVariables>;
