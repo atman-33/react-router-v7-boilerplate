@@ -5,6 +5,7 @@ const config: CodegenConfig = {
   overwrite: true,
   documents: ['app/**/*.tsx', 'app/**/*.ts'],
   ignoreNoDocuments: true, // for better experience with the watcher
+  hooks: { afterAllFileWrite: ['biome check --write'] },
   generates: {
     './app/.server/lib/graphql/@generated/': {
       preset: 'client',

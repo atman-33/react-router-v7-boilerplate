@@ -7,12 +7,7 @@
   },
   "files": {
     "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
-    "ignore": [
-      "**/.react-router",
-      "**/.vscode",
-      "**/node_modules",
-      "app/.server/lib/graphql/@generated/**"
-    ]
+    "ignore": ["**/.react-router", "**/.vscode", "**/node_modules"]
   },
   "formatter": {
     "indentStyle": "space",
@@ -47,6 +42,16 @@
         "rules": {
           "nursery": {
             "useSortedClasses": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["app/.server/lib/graphql/@generated/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
           }
         }
       }
