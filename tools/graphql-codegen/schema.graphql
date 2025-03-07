@@ -1,0 +1,109 @@
+input CreatePlanetInput {
+  name: String!
+  starClusterIds: [String!]
+}
+
+input CreateStarClusterInput {
+  name: String!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input DeletePlanetInput {
+  id: String!
+}
+
+input DeleteStarClusterInput {
+  id: String!
+}
+
+input GetPlanetArgs {
+  id: String!
+}
+
+input GetStarClusterArgs {
+  id: String!
+}
+
+type Mutation {
+  createPlanet(input: CreatePlanetInput!): Planet!
+  createStarCluster(input: CreateStarClusterInput!): StarCluster!
+  deletePlanet(input: DeletePlanetInput!): Planet
+  deleteStarCluster(input: DeleteStarClusterInput!): StarCluster
+  updatePlanet(input: UpdatePlanetInput!): Planet
+  updateStarCluster(input: UpdateStarClusterInput!): StarCluster
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Planet implements Node {
+  clusters: [PlanetStarCluster!]
+  id: ID!
+  name: String
+}
+
+type PlanetStarCluster implements Node {
+  id: ID!
+  planet: Planet
+  starCluster: StarCluster
+}
+
+type Query {
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+  planet(args: GetPlanetArgs!): Planet
+  planets(after: String, before: String, first: Int, last: Int): QueryPlanetsConnection
+  starCluster(args: GetStarClusterArgs!): StarCluster
+  starClusters(after: String, before: String, first: Int, last: Int): QueryStarClustersConnection
+}
+
+type QueryPlanetsConnection {
+  edges: [QueryPlanetsConnectionEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type QueryPlanetsConnectionEdge {
+  cursor: String!
+  node: Planet
+}
+
+type QueryStarClustersConnection {
+  edges: [QueryStarClustersConnectionEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type QueryStarClustersConnectionEdge {
+  cursor: String!
+  node: StarCluster
+}
+
+type StarCluster implements Node {
+  id: ID!
+  name: String
+  planets: [PlanetStarCluster!]
+}
+
+input UpdatePlanetInput {
+  id: String!
+  name: String!
+  starClusterIds: [String!]
+}
+
+input UpdateStarClusterInput {
+  id: String!
+  name: String!
+}

@@ -20,6 +20,8 @@ const DemoPage = () => {
         <LinkButton to="/demo/conform" label="conform" />
         <LinkButton to="/demo/react-call" label="react-call" />
         <LinkButton to="/demo/sonner" label="sonner" />
+        <Separator />
+        <LinkButton to="/demo/graphql" label="graphql" />
       </div>
     </div>
   );

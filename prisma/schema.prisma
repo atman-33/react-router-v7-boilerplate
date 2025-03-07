@@ -5,11 +5,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+// --- React Router TutorialのAddress Book用モデル定義開始 ---
 model Contact {
   id       String  @id @default(uuid())
   first    String
@@ -19,6 +24,37 @@ model Contact {
   notes    String?
   favorite Boolean @default(false)
 }
+
+// --- React Router TutorialのAddress Book用モデル定義終了 ---
+
+// --- GraphQLサーバー実装のサンプル用モデル定義開始 ---
+model Planet {
+  id        String              @id @default(uuid())
+  name      String
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  clusters  PlanetStarCluster[] // 中間モデルを通じたリレーション
+}
+
+model StarCluster {
+  id        String              @id @default(uuid())
+  name      String
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  planets   PlanetStarCluster[] // 中間モデルを通じたリレーション
+}
+
+model PlanetStarCluster {
+  planet        Planet      @relation(fields: [planetId], references: [id])
+  planetId      String
+  starCluster   StarCluster @relation(fields: [starClusterId], references: [id])
+  starClusterId String
+  assignedAt    DateTime    @default(now()) // リレーションが作成された日時
+
+  @@id([planetId, starClusterId]) // 複合主キー
+}
+
+// --- GraphQLサーバー実装のサンプル用モデル定義終了 ---
 
 model User {
   id        String   @id @default(uuid())

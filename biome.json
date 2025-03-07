@@ -45,6 +45,16 @@
           }
         }
       }
+    },
+    {
+      "include": ["app/.server/lib/graphql/@generated/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
     }
   ]
 }
