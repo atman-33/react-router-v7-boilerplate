@@ -1,14 +1,5 @@
 import { graphql } from '~/.server/lib/graphql/@generated';
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/shadcn/ui/table';
-import {
   getOriginalErrorMessage,
   initializeClient,
 } from '~/lib/graphql-client';
@@ -48,23 +39,16 @@ const DemoGraphqlPage = ({ loaderData }: Route.ComponentProps) => {
 
   return (
     <>
-      <Table>
-        <TableCaption>A list of planets</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Name</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+      <div>
+        <h2>A list of planets</h2>
+        <ul>
           {planets?.map((planet) => (
-            <TableRow key={planet?.node?.id}>
-              <TableCell>{planet?.node?.id}</TableCell>
-              <TableCell>{planet?.node?.name}</TableCell>
-            </TableRow>
+            <li key={planet?.node?.id}>
+              {planet?.node?.id} 👉 {planet?.node?.name}
+            </li>
           ))}
-        </TableBody>
-      </Table>
+        </ul>
+      </div>
     </>
   );
 };
