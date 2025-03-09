@@ -25,6 +25,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
     .request(getPlanets)
     .then((planets) => planets)
     .catch((error) => {
+      console.log(error);
       const errorMessage = getOriginalErrorMessage(error);
       return { errorMessage: errorMessage ?? (error.message as string) };
     });
