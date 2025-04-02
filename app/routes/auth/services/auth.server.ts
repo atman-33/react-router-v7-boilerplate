@@ -58,7 +58,7 @@ const googleStrategy = new GoogleStrategy<User>(
   {
     clientId: env.GOOGLE_CLIENT_ID || '',
     clientSecret: env.GOOGLE_CLIENT_SECRET || '',
-    redirectURI: `${env.CLIENT_URL}/auth/google/callback`,
+    redirectURI: `${env.CLIENT_URL}/auth/callback/google`,
   },
   async ({ tokens }) => {
     const profile = await GoogleStrategy.userProfile(tokens);
